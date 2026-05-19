@@ -34,7 +34,7 @@
       color: #00ccff;
     }
 
-    /* 頂部導覽列（偽裝成終端機選單） */
+    /* 頂部導覽列 */
     .terminal-nav {
       margin: 20px 0 40px 0;
       padding: 10px;
@@ -117,8 +117,14 @@
     }
 
     .project-tag {
-      color: #e0af68; /* 橘黃色標籤 */
+      color: #e0af68;
       font-size: 13px;
+    }
+
+    .timeline-date {
+      color: #ff007f; /* 粉紅櫻花色，標註時間軸 */
+      font-size: 14px;
+      font-weight: bold;
     }
 
     footer {
@@ -139,14 +145,15 @@
 
 <div class="terminal">
 
-  <p class="prompt">Welcome to pc1986720-cell's shell v2.6.0</p>
+  <p class="prompt">Welcome to pc1986720-cell's shell v2.7.0</p>
   <p style="color: #555;">Type a command or click the menu below to navigate.</p>
 
   <div class="terminal-nav">
-    <button class="nav-btn active" onclick="switchTab('about')">[1] About</button>
-    <button class="nav-btn" onclick="switchTab('skills')">[2] Skills</button>
-    <button class="nav-btn" onclick="switchTab('projects')">[3] Projects</button>
-    <button class="nav-btn" onclick="switchTab('certs')">[4] Certs & Exp</button>
+    <button class="nav-btn active" onclick="switchTab(event, 'about')">[1] About</button>
+    <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
+    <button class="nav-btn" onclick="switchTab(event, 'projects')">[3] Projects</button>
+    <button class="nav-btn" onclick="switchTab(event, 'certs')">[4] Certifications</button>
+    <button class="nav-btn" onclick="switchTab(event, 'experience')">[5] Experience</button>
   </div>
 
   <div id="about" class="tab-content active">
@@ -191,19 +198,27 @@
   </div>
 
   <div id="certs" class="tab-content">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep "EXPERIENCE"</p>
-    
-    <h2>[ Certifications ]</h2>
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
+    <h2>[ Professional Certifications ]</h2>
     <ul class="output-list">
-      <li>OSCP (Offensive Security Certified Professional) - 預備中</li>
-      <li>CEH (Certified Ethical Hacker)</li>
-      <li>ISO 27001 LA (Lead Auditor)</li>
+      <li><span class="item-title">OSCP</span> (Offensive Security Certified Professional) - <span style="color:#e0af68;">預備中</span></li>
+      <li><span class="item-title">CEH</span> (Certified Ethical Hacker)</li>
+      <li><span class="item-title">ISO 27001 LA</span> (Lead Auditor)</li>
     </ul>
+  </div>
 
-    <h2>[ Experience ]</h2>
+  <div id="experience" class="tab-content">
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep "EMPLOYMENT"</p>
+    <h2>[ Work Experience ]</h2>
     <ul class="output-list">
-      <li>資安工程師 @ 某科技公司 (2024 - Present)</li>
-      <li>獨立漏洞研究員 @ Bug Bounty Platform (2023 - 2024)</li>
+      <li>
+        <span class="item-title">資安工程師</span> @ 某科技公司 <span class="timeline-date">(2024 - Present)</span>
+        <br>負責內部系統弱點掃描與資安事件追蹤、源碼檢測修補建議、規劃與執行定期紅藍隊演練。
+      </li>
+      <li>
+        <span class="item-title">獨立漏洞研究員</span> @ Bug Bounty Platform <span class="timeline-date">(2023 - 2024)</span>
+        <br>針對各通報平台進行 Web/API 漏洞挖掘，曾提交多項高風險與中風險弱點並獲得認可。
+      </li>
     </ul>
   </div>
 
@@ -216,7 +231,7 @@
 </div>
 
 <script>
-  function switchTab(tabId) {
+  function switchTab(e, tabId) {
     // 1. 隱藏所有的分頁內容
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => content.classList.remove('active'));
@@ -229,7 +244,7 @@
     document.getElementById(tabId).classList.add('active');
 
     // 4. 讓被點選的按鈕變成選取狀態
-    event.currentTarget.classList.add('active');
+    e.currentTarget.classList.add('active');
   }
 </script>
 
