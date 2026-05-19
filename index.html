@@ -6,7 +6,6 @@
   <title>pc1986720-cell // Cyber Security</title>
 
   <style>
-    /* 基礎重設與駭客風字體 */
     *{
       margin: 0;
       padding: 0;
@@ -14,51 +13,65 @@
     }
 
     body {
-      background-color: #0a0a0a; /* 極致深黑 */
-      color: #a9b1d6; /* 舒適的程式碼白灰色 */
+      background-color: #0a0a0a;
+      color: #a9b1d6;
       font-family: 'Courier New', Courier, monospace, "Microsoft JhengHei";
       line-height: 1.6;
       padding: 40px 20px;
     }
 
-    /* 終端機容器 */
     .terminal {
       max-width: 900px;
       margin: 0 auto;
     }
 
-    /* 提示字元與綠色強調 */
     .prompt {
-      color: #00ff66; /* 經典終端機綠 */
+      color: #00ff66;
       font-weight: bold;
     }
 
     .path {
-      color: #00ccff; /* 路徑藍 */
+      color: #00ccff;
     }
 
-    /* 打字機效果動畫 */
-    .typing {
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #00ff66; /* 游標 */
-      animation: 
-        type 2s steps(40, end),
-        blink 0.75s step-end infinite;
+    /* 頂部導覽列（偽裝成終端機選單） */
+    .terminal-nav {
+      margin: 20px 0 40px 0;
+      padding: 10px;
+      border: 1px dashed #333;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
-    @keyframes type {
-      from { width: 0 }
-      to { width: 100% }
+    .nav-btn {
+      color: #00ff66;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 2px 8px;
+      transition: all 0.2s;
     }
 
-    @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: #00ff66 }
+    .nav-btn:hover, .nav-btn.active {
+      background-color: #00ff66;
+      color: #0a0a0a;
+      font-weight: bold;
     }
 
-    /* 區塊樣式 */
+    /* 分頁區塊預設隱藏 */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* 當前啟動的分頁才顯示 */
+    .tab-content.active {
+      display: block;
+    }
+
     h1 {
       font-size: 28px;
       color: #00ff66;
@@ -77,7 +90,6 @@
       color: #cbd5e1;
     }
 
-    /* 列表呈現方式（模仿範例的乾淨排版） */
     .output-list {
       list-style: none;
       padding-left: 15px;
@@ -88,7 +100,6 @@
       position: relative;
     }
 
-    /* 列表前置符號 */
     .output-list li::before {
       content: "├─";
       color: #555;
@@ -105,21 +116,11 @@
       font-weight: bold;
     }
 
-    /* 連結樣式（反白效果） */
-    .links a {
-      color: #00ff66;
-      text-decoration: none;
-      border-bottom: 1px dashed #00ff66;
-      margin-right: 20px;
-      transition: all 0.2s;
+    .project-tag {
+      color: #e0af68; /* 橘黃色標籤 */
+      font-size: 13px;
     }
 
-    .links a:hover {
-      background-color: #00ff66;
-      color: #0a0a0a;
-    }
-
-    /* 頁尾 */
     footer {
       margin-top: 60px;
       color: #444;
@@ -127,47 +128,110 @@
       border-top: 1px solid #222;
       padding-top: 20px;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
 <div class="terminal">
 
-  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ <span class="typing">whoami</span></p>
-  
-  <h1>CYBER SECURITY PORTFOLIO</h1>
-  
-  <p>
-    專注於企業資安治理、滲透測試、自動化紅隊演練、AI Security、SOC 監控、WAF 分析與漏洞研究。
-  </p>
+  <p class="prompt">Welcome to pc1986720-cell's shell v2.6.0</p>
+  <p style="color: #555;">Type a command or click the menu below to navigate.</p>
 
-  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
-  
-  <h2>[ Skills Matrix ]</h2>
-  <ul class="output-list">
-    <li><span class="item-title">Red Team</span> - 自動化滲透測試與漏洞分析</li>
-    <li><span class="item-title">Blue Team</span> - SOC 監控與事件分析</li>
-    <li><span class="item-title">ISO 27001</span> - 企業資安治理與稽核</li>
-    <li><span class="item-title">WAF Security</span> - Web 防護與 Log 分析</li>
-    <li><span class="item-title">Cloud Security</span> - AWS / Azure / GCP 雲端安全</li>
-    <li><span class="item-title">AI Security</span> - LLM / AI Threat Modeling 威脅建模</li>
-  </ul>
+  <div class="terminal-nav">
+    <button class="nav-btn active" onclick="switchTab('about')">[1] About</button>
+    <button class="nav-btn" onclick="switchTab('skills')">[2] Skills</button>
+    <button class="nav-btn" onclick="switchTab('projects')">[3] Projects</button>
+    <button class="nav-btn" onclick="switchTab('certs')">[4] Certs & Exp</button>
+  </div>
 
-  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ netstat -an | grep LINKS</p>
-  
-  <h2>[ External Links ]</h2>
-  <p class="links">
-    <a href="#" target="_blank">> View Projects</a>
-    <a href="https://github.com/" target="_blank">> GitHub Profile</a>
-  </p>
+  <div id="about" class="tab-content active">
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
+    <h1>CYBER SECURITY PORTFOLIO</h1>
+    <p>
+      專注於企業資安治理、滲透測試、自動化紅隊演練、AI Security、SOC 監控、WAF 分析與漏洞研究。
+      致力於結合自動化腳本與威脅情報，協助企業建立防禦縱深。
+    </p>
+  </div>
 
-  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ <span class="typing" style="animation-delay: 2s; width: 0; animation-fill-mode: forwards;">_</span></p>
+  <div id="skills" class="tab-content">
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
+    <h2>[ Skills Matrix ]</h2>
+    <ul class="output-list">
+      <li><span class="item-title">Red Team</span> - 自動化滲透測試與漏洞分析</li>
+      <li><span class="item-title">Blue Team</span> - SOC 監控與事件分析</li>
+      <li><span class="item-title">ISO 27001</span> - 企業資安治理與稽核</li>
+      <li><span class="item-title">WAF Security</span> - Web 防護與 Log 分析</li>
+      <li><span class="item-title">Cloud Security</span> - AWS / Azure / GCP 雲端安全</li>
+      <li><span class="item-title">AI Security</span> - LLM / AI Threat Modeling 威脅建模</li>
+    </ul>
+  </div>
+
+  <div id="projects" class="tab-content">
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ ls -la ./projects</p>
+    <h2>[ Selected Projects ]</h2>
+    <ul class="output-list">
+      <li>
+        <span class="item-title">Auto-Pentest-Framework</span> <span class="project-tag">[Python/Docker]</span>
+        <br>開發自動化網頁滲透測試工具，整合 Nmap、Dirsearch 與常見漏洞掃描。
+      </li>
+      <li>
+        <span class="item-title">LLM-Threat-Guard</span> <span class="project-tag">[AI Security]</span>
+        <br>針對大型語言模型（LLM）的 Prompt Injection 進行防禦攔截與日誌審查系統。
+      </li>
+      <li>
+        <span class="item-title">WAF-Log-Parser</span> <span class="project-tag">[Go/ELK]</span>
+        <br>高併發分析 ModSecurity 日誌，即時捕捉惡意攻擊行為。
+      </li>
+    </ul>
+  </div>
+
+  <div id="certs" class="tab-content">
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep "EXPERIENCE"</p>
+    
+    <h2>[ Certifications ]</h2>
+    <ul class="output-list">
+      <li>OSCP (Offensive Security Certified Professional) - 預備中</li>
+      <li>CEH (Certified Ethical Hacker)</li>
+      <li>ISO 27001 LA (Lead Auditor)</li>
+    </ul>
+
+    <h2>[ Experience ]</h2>
+    <ul class="output-list">
+      <li>資安工程師 @ 某科技公司 (2024 - Present)</li>
+      <li>獨立漏洞研究員 @ Bug Bounty Platform (2023 - 2024)</li>
+    </ul>
+  </div>
+
+  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
 
   <footer>
     &copy; 2026 pc1986720-cell. All rights reserved.
   </footer>
 
 </div>
+
+<script>
+  function switchTab(tabId) {
+    // 1. 隱藏所有的分頁內容
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    // 2. 取消所有按鈕的 active 樣式
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // 3. 顯示點選的分頁內容
+    document.getElementById(tabId).classList.add('active');
+
+    // 4. 讓被點選的按鈕變成選取狀態
+    event.currentTarget.classList.add('active');
+  }
+</script>
 
 </body>
 </html>
