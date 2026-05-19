@@ -122,7 +122,7 @@
     }
 
     .timeline-date {
-      color: #ff007f; /* 粉紅櫻花色，標註時間軸 */
+      color: #ff007f;
       font-size: 14px;
       font-weight: bold;
     }
@@ -135,9 +135,15 @@
       padding-top: 20px;
     }
 
+    /* 漸入與開機動態效果 */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .boot-sequence p {
+      margin-bottom: 4px;
+      animation: fadeIn 0.4s ease-in-out both;
     }
   </style>
 </head>
@@ -145,10 +151,15 @@
 
 <div class="terminal">
 
-  <p class="prompt">Welcome to pc1986720-cell's shell v2.7.0</p>
-  <p style="color: #555;">Type a command or click the menu below to navigate.</p>
+  <div class="boot-sequence" style="font-size: 14px; margin-bottom: 30px; border-left: 2px solid #333; padding-left: 15px;">
+    <p style="color: #555; animation-delay: 0.1s;">[    0.000000] Booting Linux kernel v6.12.0-ext...</p>
+    <p style="color: #cbd5e1; animation-delay: 0.3s;">[<span style="color:#00ff66;">  OK  </span>] Initializing Firewall & WAF Rulesets...</p>
+    <p style="color: #cbd5e1; animation-delay: 0.5s;">[<span style="color:#00ff66;">  OK  </span>] Loading RedTeam / Pentest Framework Modules...</p>
+    <p style="color: #cbd5e1; animation-delay: 0.7s;">[<span style="color:#00ff66;">  OK  </span>] LLM-Threat-Guard API Connection established.</p>
+    <p style="color: #00ccff; animation-delay: 0.9s;">[ INFO ] Identity verified. Welcome back, pc1986720-cell.</p>
+  </div>
 
-  <div class="terminal-nav">
+  <div class="terminal-nav" style="animation: fadeIn 0.3s ease-in-out 1.1s both;">
     <button class="nav-btn active" onclick="switchTab(event, 'about')">[1] About</button>
     <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
     <button class="nav-btn" onclick="switchTab(event, 'projects')">[3] Projects</button>
@@ -156,73 +167,77 @@
     <button class="nav-btn" onclick="switchTab(event, 'experience')">[5] Experience</button>
   </div>
 
-  <div id="about" class="tab-content active">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
-    <h1>CYBER SECURITY PORTFOLIO</h1>
-    <p>
-      專注於企業資安治理、滲透測試、自動化紅隊演練、AI Security、SOC 監控、WAF 分析與漏洞研究。
-      致力於結合自動化腳本與威脅情報，協助企業建立防禦縱深。
-    </p>
-  </div>
+  <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
-  <div id="skills" class="tab-content">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
-    <h2>[ Skills Matrix ]</h2>
-    <ul class="output-list">
-      <li><span class="item-title">Red Team</span> - 自動化滲透測試與漏洞分析</li>
-      <li><span class="item-title">Blue Team</span> - SOC 監控與事件分析</li>
-      <li><span class="item-title">ISO 27001</span> - 企業資安治理與稽核</li>
-      <li><span class="item-title">WAF Security</span> - Web 防護與 Log 分析</li>
-      <li><span class="item-title">Cloud Security</span> - AWS / Azure / GCP 雲端安全</li>
-      <li><span class="item-title">AI Security</span> - LLM / AI Threat Modeling 威脅建模</li>
-    </ul>
-  </div>
+    <div id="about" class="tab-content active">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
+      <h1>CYBER SECURITY PORTFOLIO</h1>
+      <p>
+        專注於企業資安治理、滲透測試、自動化紅隊演練、AI Security、SOC 監控、WAF 分析與漏洞研究。
+        致力於結合自動化腳本與威脅情報，協助企業建立防禦縱深。
+      </p>
+    </div>
 
-  <div id="projects" class="tab-content">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ ls -la ./projects</p>
-    <h2>[ Selected Projects ]</h2>
-    <ul class="output-list">
-      <li>
-        <span class="item-title">Auto-Pentest-Framework</span> <span class="project-tag">[Python/Docker]</span>
-        <br>開發自動化網頁滲透測試工具，整合 Nmap、Dirsearch 與常見漏洞掃描。
-      </li>
-      <li>
-        <span class="item-title">LLM-Threat-Guard</span> <span class="project-tag">[AI Security]</span>
-        <br>針對大型語言模型（LLM）的 Prompt Injection 進行防禦攔截與日誌審查系統。
-      </li>
-      <li>
-        <span class="item-title">WAF-Log-Parser</span> <span class="project-tag">[Go/ELK]</span>
-        <br>高併發分析 ModSecurity 日誌，即時捕捉惡意攻擊行為。
-      </li>
-    </ul>
-  </div>
+    <div id="skills" class="tab-content">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
+      <h2>[ Skills Matrix ]</h2>
+      <ul class="output-list">
+        <li><span class="item-title">Red Team</span> - 自動化滲透測試與漏洞分析</li>
+        <li><span class="item-title">Blue Team</span> - SOC 監控與事件分析</li>
+        <li><span class="item-title">ISO 27001</span> - 企業資安治理與稽核</li>
+        <li><span class="item-title">WAF Security</span> - Web 防護與 Log 分析</li>
+        <li><span class="item-title">Cloud Security</span> - AWS / Azure / GCP 雲端安全</li>
+        <li><span class="item-title">AI Security</span> - LLM / AI Threat Modeling 威脅建模</li>
+      </ul>
+    </div>
 
-  <div id="certs" class="tab-content">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
-    <h2>[ Professional Certifications ]</h2>
-    <ul class="output-list">
-      <li><span class="item-title">OSCP</span> (Offensive Security Certified Professional) - <span style="color:#e0af68;">預備中</span></li>
-      <li><span class="item-title">CEH</span> (Certified Ethical Hacker)</li>
-      <li><span class="item-title">ISO 27001 LA</span> (Lead Auditor)</li>
-    </ul>
-  </div>
+    <div id="projects" class="tab-content">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ ls -la ./projects</p>
+      <h2>[ Selected Projects ]</h2>
+      <ul class="output-list">
+        <li>
+          <span class="item-title">Auto-Pentest-Framework</span> <span class="project-tag">[Python/Docker]</span>
+          <br>開發自動化網頁滲透測試工具，整合 Nmap、Dirsearch 與常見漏洞掃描。
+        </li>
+        <li>
+          <span class="item-title">LLM-Threat-Guard</span> <span class="project-tag">[AI Security]</span>
+          <br>針對大型語言模型（LLM）的 Prompt Injection 進行防禦攔截與日誌審查系統。
+        </li>
+        <li>
+          <span class="item-title">WAF-Log-Parser</span> <span class="project-tag">[Go/ELK]</span>
+          <br>高併發分析 ModSecurity 日誌，即時捕捉惡意攻擊行為。
+        </li>
+      </ul>
+    </div>
 
-  <div id="experience" class="tab-content">
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep "EMPLOYMENT"</p>
-    <h2>[ Work Experience ]</h2>
-    <ul class="output-list">
-      <li>
-        <span class="item-title">資安工程師</span> @ 某科技公司 <span class="timeline-date">(2024 - Present)</span>
-        <br>負責內部系統弱點掃描與資安事件追蹤、源碼檢測修補建議、規劃與執行定期紅藍隊演練。
-      </li>
-      <li>
-        <span class="item-title">獨立漏洞研究員</span> @ Bug Bounty Platform <span class="timeline-date">(2023 - 2024)</span>
-        <br>針對各通報平台進行 Web/API 漏洞挖掘，曾提交多項高風險與中風險弱點並獲得認可。
-      </li>
-    </ul>
-  </div>
+    <div id="certs" class="tab-content">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
+      <h2>[ Professional Certifications ]</h2>
+      <ul class="output-list">
+        <li><span class="item-title">OSCP</span> (Offensive Security Certified Professional) - <span style="color:#e0af68;">預備中</span></li>
+        <li><span class="item-title">CEH</span> (Certified Ethical Hacker)</li>
+        <li><span class="item-title">ISO 27001 LA</span> (Lead Auditor)</li>
+      </ul>
+    </div>
 
-  <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
+    <div id="experience" class="tab-content">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep "EMPLOYMENT"</p>
+      <h2>[ Work Experience ]</h2>
+      <ul class="output-list">
+        <li>
+          <span class="item-title">資安工程師</span> @ 某科技公司 <span class="timeline-date">(2024 - Present)</span>
+          <br>負責內部系統弱點掃描與資安事件追蹤、源碼檢測修補建議、規劃與執行定期紅藍隊演練。
+        </li>
+        <li>
+          <span class="item-title">獨立漏洞研究員</span> @ Bug Bounty Platform <span class="timeline-date">(2023 - 2024)</span>
+          <br>針對各通報平台進行 Web/API 漏洞挖掘，曾提交多項高風險與中風險弱點並獲得認可。
+        </li>
+      </ul>
+    </div>
+
+    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
+
+  </div>
 
   <footer>
     &copy; 2026 pc1986720-cell. All rights reserved.
