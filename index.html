@@ -165,6 +165,7 @@
     <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
     <button class="nav-btn" onclick="switchTab(event, 'certs')">[3] Certifications</button>
     <button class="nav-btn" onclick="switchTab(event, 'experience')">[4] Experience</button>
+    <button class="nav-btn" onclick="switchTab(event, 'labs')">[5] Labs</button>
   </div>
 
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
@@ -279,6 +280,24 @@
       </ul>
     </div>
 
+    <div id="labs" class="tab-content">
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
+      <h2>[ Security Labs & Environment ]</h2>
+      
+      <p style="color: #00ccff; margin-bottom: 5px;">/* Home Lab & Simulation */</p>
+      <ul class="output-list" style="margin-bottom: 20px;">
+        <li><span class="item-title">Proxmox VE / ESXi Lab</span> - 自建虛擬化實驗環境，用於模擬企業內網架構與隔離測試</li>
+        <li><span class="item-title">AD Domain Environment</span> - 建立 Windows Server 網域環境，進行 GCB 基礎基準測試與 Active Directory 權限控管研究</li>
+        <li><span class="item-title">PFSense / OPNSense</span> - 實作軟路由與防火牆規則微調，模擬企業級流量過濾與 VPN 隧道路由</li>
+      </ul>
+
+      <p style="color: #00ccff; margin-bottom: 5px;">/* NetDevOps & Shell Automation */</p>
+      <ul class="output-list">
+        <li><span class="item-title">Network Backups Automation</span> - 撰寫 Python/Bash 腳本，透過 SSH/Netmiko 自動化備份交換器與防火牆設定檔</li>
+        <li><span class="item-title">Log Monitoring System</span> - 自建輕量級日誌分析環境，串接 Syslog 進行惡意連線與異常登入行為告警測試</li>
+      </ul>
+    </div>
+    
     <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
 
   </div>
