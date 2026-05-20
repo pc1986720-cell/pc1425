@@ -89,23 +89,26 @@
 
     .output-list {
       list-style: none;
-      padding-left: 15px;
+      padding-left: 20px; /* 加大左邊距，為懸掛樹狀符號留空間 */
     }
 
-    /* 🛠️ 終極斷行優化：解決中英文夾雜、括號特殊符號在邊界的排版災難 */
+    /* 🛠️ 完美排版引擎：中英文夾雜、斷行兩端對齊、不擠壓英文單字 */
     .output-list li {
       margin-bottom: 14px;
       position: relative;
-      word-break: break-word;   /* 允許長英文單字在邊界處拆分換行 */
-      overflow-wrap: anywhere;  /* 防止中英文夾雜字串提早整塊掉落 */
-      text-align: justify;      /* 左右兩端對齊，讓文字邊緣像指令列輸出般平齊 */
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      text-align: justify;
+      text-justify: inter-ideograph; /* 優化中文間距對齊，防止英文被扯開 */
     }
 
+    /* 🛠️ 樹狀符號重構：確保文字換行時，絕不入侵左側符號區 */
     .output-list li::before {
       content: "├─";
       color: #555;
       position: absolute;
       left: -20px;
+      top: 0;
     }
 
     .output-list li:last-child::before {
@@ -286,7 +289,7 @@
           <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
           <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運。
           <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。
-          <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
+          <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
           <br><span style="color: #555;">└─</span> <span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。
           <br><span style="color: #555;">└─</span> <span class="item-title">核心專案：</span>參與頻寬管理專案、<span class="project-tag">CyberArk</span> 特權帳號專案、端點端到端加密（E2EE）專案與異地備援規劃。
         </li>
@@ -304,7 +307,7 @@
         </li>
         <li>
           <span class="item-title">維修測試工程師</span> @ 歆宇科技 <span class="timeline-date">(2010/07 - 2012/02)</span>
-          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置。
+          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置.
         </li>
       </ul>
     </div>
