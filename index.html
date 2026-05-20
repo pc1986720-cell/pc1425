@@ -20,7 +20,6 @@
       padding: 40px 20px;
     }
 
-    /* 🛠️ 重點調整：將整體終端機最大寬度由 900px 拓寬至 1100px，讓文字可以盡情攤開不亂斷行 */
     .terminal {
       max-width: 1100px;
       margin: 0 auto;
@@ -93,9 +92,12 @@
       padding-left: 15px;
     }
 
+    /* 🛠️ 核心優化：維持中文字詞完整性，防止網頁邊緣不自然碎斷 */
     .output-list li {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       position: relative;
+      word-break: keep-all;
+      white-space: normal;
     }
 
     .output-list li::before {
@@ -125,7 +127,6 @@
       font-weight: bold;
     }
 
-    /* 隱藏原生滾動條元件，讓 About 的巨災簽名檔保持滑動但外觀乾淨 */
     .epic-incidents-container {
       margin-bottom: 25px;
       font-size: 14px;
@@ -240,7 +241,7 @@
 
       <p style="color: #00ccff; margin-bottom: 5px;">/* Virtualization & Development */</p>
       <ul class="output-list">
-        <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛低化專家</li>
+        <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
         <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
       </ul>
     </div>
