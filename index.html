@@ -311,21 +311,83 @@
 </div>
 
 <script>
+  // ================= 1. 分頁切換功能 =================
   function switchTab(e, tabId) {
-    // 1. 隱藏所有的分頁內容
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => content.classList.remove('active'));
 
-    // 2. 取消所有按鈕的 active 樣式
     const buttons = document.querySelectorAll('.nav-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
 
-    // 3. 顯示點選的分頁內容
     document.getElementById(tabId).classList.add('active');
-
-    // 4. 讓被點選的按鈕變成選取狀態
     e.currentTarget.classList.add('active');
   }
+
+  // ================= 2. Linux 格式時間生成器 =================
+  function getLinuxDateString() {
+    const now = new Date();
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    const dayName = days[now.getDay()];
+    const monthName = months[now.getMonth()];
+    const dayNum = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const year = now.getFullYear();
+    
+    return `${dayName} ${monthName} ${dayNum} ${hours}:${minutes}:${seconds} CST ${year}`;
+  }
+
+  // ================= 3. 終端機打字機特效 =================
+  function typeEffect(elementId, text, speed, callback) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    let i = 0;
+    element.textContent = "";
+    
+    function typing() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(typing, speed);
+      } else if (callback) {
+        // 打字完成後，執行回調函數（例如啟動時間每秒跳動）
+        callback();
+      }
+    }
+    typing();
+  }
+
+  // ================= 4. 初始化動態核心 =================
+  document.addEventListener('DOMContentLoaded', () => {
+    // 首先確保 HTML 裡有對應的容器（如果沒有就主動防禦補上，避免報錯）
+    const dateElement = document.getElementById('current-date');
+    if (!dateElement) {
+      // 找不到 id 時，動態在 date 指令後面塞入一個
+      const dateInputs = document.querySelectorAll('p');
+      dateInputs.forEach(p => {
+        if (p.textContent.includes('$ date')) {
+          const newTarget = document.createElement('p');
+          newTarget.id = 'current-date';
+          newTarget.style.color = '#555';
+          newTarget.style.marginBottom = '25px';
+          p.parentNode.insertBefore(newTarget, p.nextSibling);
+        }
+      });
+    }
+
+    // 模擬核心：先跑打字機特效（花 0.5 秒打出初始時間）
+    const initialTime = getLinuxDateString();
+    typeEffect('current-date', initialTime, 20, () => {
+      // 打字結束後，開啟每秒定時器，讓時間無縫開始滴答跳動！
+      setInterval(() => {
+        document.getElementById('current-date').textContent = getLinuxDateString();
+      }, 1000);
+    });
+  });
 </script>
 
 </body>
