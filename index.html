@@ -34,7 +34,6 @@
       color: #00ccff;
     }
 
-    /* 頂部導覽列 */
     .terminal-nav {
       margin: 20px 0 40px 0;
       padding: 10px;
@@ -61,13 +60,11 @@
       font-weight: bold;
     }
 
-    /* 分頁區塊預設隱藏 */
     .tab-content {
       display: none;
       animation: fadeIn 0.3s ease-in-out;
     }
 
-    /* 當前啟動的分頁才顯示 */
     .tab-content.active {
       display: block;
     }
@@ -135,7 +132,6 @@
       padding-top: 20px;
     }
 
-    /* 漸入與開機動態效果 */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
@@ -151,13 +147,13 @@
 
 <div class="terminal">
 
-  <div class="boot-sequence" style="font-size:14px; margin-bottom:30px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
+  <div class="boot-sequence" style="font-size:14px; margin-bottom:30px; border-left:2px solid #333; padding-left:15px; word-break:break-all;">
     <p style="color:#555; animation-delay:0.1s;">[0.000000] Booting Linux kernel v6.12.0-ext... (Please don't touch anything)</p>
     <p style="color:#cbd5e1; animation-delay:0.3s;">[<span style="color:#00ff66;">OK</span>] Shifting blame to the Network Team...</p>
-    <p style="color:#ff0055; animation-delay:0.5s;">[<span style="color:#ff0055;">CRITICAL</span>] CrowdStrike Falcon Sensor updated.</p>
-    <p style="color:#ff0055; animation-delay:0.7s;">[<span style="color:#ff0055;">FATAL</span>] Loading C-00000291.sys... Logic error detected.</p>
-    <p style="color:#00ccff; animation-delay:0.9s;">[SYSTEM] Ready to trigger global BSOD. Generating job security for IT administrators...</p>
-    <p style="color:#ffcc00; animation-delay:1.1s;">[INFO] Recovery mode: Booting into Safe Mode and deleting the channel file. Welcome back, PC.</p>
+    <p style="color:#cbd5e1; animation-delay:0.5s;">[<span style="color:#00ff66;">OK</span>] It compiles on my machine, pushing straight to Production...</p>
+    <p style="color:#cbd5e1; animation-delay:0.7s;">[<span style="color:#ffcc00;">WARN</span>] Found 9,999+ vulnerabilities. Fixed by ignoring them.</p>
+    <p style="color:#ff0055; animation-delay:0.9s;">[<span style="color:#ff0055;">ERROR</span>] User "Human" detected. The biggest security loophole in the system.</p>
+    <p style="color:#00ccff; animation-delay:1.1s;">[INFO] System is inherently unstable but running. Welcome back, PC.</p>
   </div>
 
   <div class="terminal-nav" style="animation:fadeIn 0.3s ease-in-out 1.3s both;">
@@ -171,22 +167,23 @@
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
     <div id="about" class="tab-content active">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
-      <p id="current-date" style="margin-bottom: 25px; color: #72809e; font-weight: bold;"></p>
-
       <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
-      <div style="margin-bottom: 25px; max-width: 900px; font-size: 14px; font-style: italic; line-height: 1.8;">
-        <p style="color: #ff5577; margin-bottom: 5px; font-weight: bold;">
-          /* R.I.P. C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys // 謝謝你用一隻空指標，在 2024.07.19 物理超渡了全球 850 萬台伺服器。 */
+      <p style="margin-bottom: 5px; font-weight: bold; color: #00ff66; font-size: 18px;">R.I.P.</p>
+    <div style="margin-bottom: 25px; max-width: 900px; font-size: 14px; font-style: italic; line-height: 1.8;">
+        <p style="color: #00ff66; margin-bottom: 5px; font-weight: bold;">
+          /* C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys // 謝謝你用一隻空指標，在 2024.07.19 物理超渡了全球 850 萬台伺服器。 */
         </p>
-        <p style="color: #ffcc00; margin-bottom: 5px; font-weight: bold;">
-          /* R.I.P. liblzma.so (CVE-2024-3094) // 那個潛伏兩年、差點用一個 SSH 後門綁架全人類 Linux 伺服器的神秘工程師 "Jia Tan"。 */
+        <p style="color: #00ff66; margin-bottom: 5px; font-weight: bold;">
+          /* liblzma.so (CVE-2024-3094) // 那個潛伏兩年、差點用一個 SSH 後門綁架全人類 Linux 伺服器的神秘工程師 "Jia Tan"。 */
         </p>
-        <p style="color: #00ccff; margin-bottom: 0; font-weight: bold;">
-          /* R.I.P. Global BGP Routing & Ivanti VPN // 那些在 2025-2026 年被勒索軟體點名、連夜拔掉網路線、徹夜在機房重構骨幹架構的維運肝臟。 */
+        <p style="color: #00ff66; margin-bottom: 0; font-weight: bold;">
+          /* Global BGP Routing & Ivanti VPN // 那些在 2025-2026 年被勒索軟體點名、連夜拔掉網路線、徹夜在機房重構骨幹架構的維運肝臟。 */
         </p>
       </div>
       
+      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
+      <p id="current-date" style="margin-bottom: 25px; color: #72809e; font-weight: bold;"></p>
+
       <h1>CYBER SECURITY PORTFOLIO</h1>
       <p>
         專注於企業資安治理與隱私管理體系（ISO 27001 / 27701）的導入與審查決策。
@@ -212,10 +209,9 @@
       
       <p style="color: #00ccff; margin-bottom: 5px;">/* Information Security & Governance */</p>
       <ul class="output-list" style="margin-bottom: 20px;">
-        <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
         <li><span class="item-title">ISO 27001:2022 LA</span> - 資訊安全管理系統主導稽核員</li>
-        <li><span class="item-title">ISO 27701:2025 LA</span> - 隱私資訊管理主導稽核員</li>
         <li><span class="item-title">IEC 62443-2-1 LA</span> - 工業自動化與控制系統資安方案主導稽核員</li>
+        <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
         <li><span class="item-title">ECSA</span> - EC-Council Certified Security Analyst 資安分析專家</li>
         <li><span class="item-title">ECIH</span> - Incident Handling and Response, IHR 資安事件危機處理與回應</li>
         <li><span class="item-title">Fortinet NSE 4</span> - Network Security Professional 網路安全專家</li>
@@ -272,7 +268,7 @@
         </li>
         <li>
           <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
-          <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運。
+          <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運.
           <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。
           <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
           <br><span style="color: #555;">└─</span> <span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。
@@ -281,23 +277,18 @@
         <li>
           <span class="item-title">技術顧問工程師 (FAE)</span> @ 曜祥網技 <span class="timeline-date">(2016/12 - 2019/02)</span>
           <br>擔任資安前端技術顧問，負責大型金融、政府與指標性企業客戶資安防禦系統與資安合規建置專案（SIP / GCB）。
-          <br><span style="color: #555;">└─</span> <span class="item-title">政府與企業案：</span>法務部 SIP 建置案、台灣世曦 SIP 建置案、凌群電腦中心 SIP 建置案。
-          <br><span style="color: #555;">└─</span> <span class="item-title">金融合規案：</span>中國信託、第一金控、第一銀行信用卡處、土地銀行 GCB 政府組態基準合規建置案。
         </li>
         <li>
           <span class="item-title">維護工程師 (MIS)</span> @ 山富國際旅行社 <span class="timeline-date">(2014/11 - 2016/06)</span>
           <br>維護全台大型電商旅遊平台機房架構，主導多項企業級核心基礎設施現代化升級專案。
-          <br><span style="color: #555;">└─</span> 負責企業雲端化升級（導入 <span class="project-tag">Office 365 / 騰訊 QQ</span> 通訊軟體）。
-          <br><span style="color: #555;">└─</span> 協助核心機房硬體大更換（<span class="project-tag">IBM M6</span> 設備更換、Storage 儲存設備汰換與 <span class="project-tag">Hyper-V</span> 叢集容錯轉移建置）。
         </li>
         <li>
           <span class="item-title">程式設計師</span> @ 泓準資訊 <span class="timeline-date">(2012/02 - 2014/10)</span>
           <br>兼管系統維運之 MIS 程式工程師，負責網際網路平台之核心代碼撰寫與後端資料庫優化。
-          <br><span style="color: #555;">└─</span> <span class="project-tag">ASP</span> 網頁功能開發、<span class="project-tag">MS SQL Server</span> 資料庫建置管理、網路故障排除與軟硬體維護。
         </li>
         <li>
           <span class="item-title">維修測試工程師</span> @ 歆宇科技 <span class="timeline-date">(2010/07 - 2012/02)</span>
-          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置，扎根硬體與作業系統底層維運。
+          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置。
         </li>
       </ul>
     </div>
@@ -308,17 +299,17 @@
       
       <p style="color: #00ccff; margin-bottom: 5px;">/* Network Security & Hybrid Simulation */</p>
       <ul class="output-list" style="margin-bottom: 20px;">
-        <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接，並模擬 Remote Worker 安全連回總部之遠端存取架構.</li>
-        <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像，用於複雜網拓之命令列指令實作、封包路由行為與架構安全變更預驗證.</li>
-        <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署、網路虛擬交換器（vSwitch / vDS）劃分與高可靠性實驗環境建置.</li>
+        <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。</li>
+        <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。</li>
+        <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。</li>
       </ul>
 
       <p style="color: #00ccff; margin-bottom: 5px;">/* NetDevOps & SecOps Automation */</p>
       <ul class="output-list">
-        <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules），針對 Cisco 核心交換器、無線網路斷線、防火牆流量異常突發與設備 OID 進行深度指標追蹤.</li>
-        <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制，確保網路威脅與線路中斷能在秒級內即時派單響應.</li>
-        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser），優化異質設備 Syslog 欄位提取與威脅關聯分析規則.</li>
-        <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作動態解析與自動化導入 PA 防火牆惡意 IP 黑名單，達成自動化威脅防禦響應（SOAR 概念）.</li>
+        <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
+        <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
+        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
+        <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
     
@@ -333,7 +324,6 @@
 </div>
 
 <script>
-  // ================= 1. 分頁切換功能 =================
   function switchTab(e, tabId) {
     const contents = document.querySelectorAll('.tab-content');
     contents.forEach(content => content.classList.remove('active'));
@@ -345,7 +335,6 @@
     e.currentTarget.classList.add('active');
   }
 
-  // ================= 2. Linux 格式時間生成器 =================
   function getLinuxDateString() {
     const now = new Date();
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -362,7 +351,6 @@
     return `${dayName} ${monthName} ${dayNum} ${hours}:${minutes}:${seconds} CST ${year}`;
   }
 
-  // ================= 3. 終端機打字機特效 =================
   function typeEffect(elementId, text, speed, callback) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -382,23 +370,7 @@
     typing();
   }
 
-  // ================= 4. 初始化動態核心 =================
   document.addEventListener('DOMContentLoaded', () => {
-    const dateElement = document.getElementById('current-date');
-    if (!dateElement) {
-      const dateInputs = document.querySelectorAll('p');
-      dateInputs.forEach(p => {
-        if (p.textContent.includes('$ date')) {
-          const newTarget = document.createElement('p');
-          newTarget.id = 'current-date';
-          newTarget.style.color = '#72809e';
-          newTarget.style.fontWeight = 'bold';
-          newTarget.style.marginBottom = '25px';
-          p.parentNode.insertBefore(newTarget, p.nextSibling);
-        }
-      });
-    }
-
     const initialTime = getLinuxDateString();
     typeEffect('current-date', initialTime, 20, () => {
       setInterval(() => {
