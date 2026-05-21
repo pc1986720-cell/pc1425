@@ -89,20 +89,18 @@
 
     .output-list {
       list-style: none;
-      padding-left: 20px; /* 加大左邊距，為懸掛樹狀符號留空間 */
+      padding-left: 20px;
     }
 
-    /* 🛠️ 完美排版引擎：中英文夾雜、斷行兩端對齊、不擠壓英文單字 */
     .output-list li {
       margin-bottom: 14px;
       position: relative;
       word-break: break-word;
       overflow-wrap: anywhere;
       text-align: justify;
-      text-justify: inter-ideograph; /* 優化中文間距對齊，防止英文被扯開 */
+      text-justify: inter-ideograph;
     }
 
-    /* 🛠️ 樹狀符號重構：確保文字換行時，絕不入侵左側符號區 */
     .output-list li::before {
       content: "├─";
       color: #555;
@@ -192,7 +190,10 @@
 
     <div id="about" class="tab-content active">
       <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
-      <p style="margin-bottom: 10px; font-weight: bold; color: #00ff66; font-size: 18px;">PC</p>
+      
+      <p style="margin-bottom: 20px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.7;">
+        我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷、技術沉澱與專業認證。深知資安與網路領域浩瀚無垠，我始終保持不進則退的緊迫感，持續在實戰與研究中精進。若有不足之處，誠摯歡迎各位前輩指導與鞭策。
+      </p>
       
       <div class="epic-incidents-container">
         <p style="margin-bottom: 5px;">/* <span style="color: #00ff66; font-weight: bold;">R.I.P. C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys</span> // 謝謝你用一隻空指標，在 2024.07.19 物理超渡了全球 850 萬台伺服器。 */</p>
@@ -307,7 +308,7 @@
         </li>
         <li>
           <span class="item-title">維修測試工程師</span> @ 歆宇科技 <span class="timeline-date">(2010/07 - 2012/02)</span>
-          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置.
+          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置。
         </li>
       </ul>
     </div>
