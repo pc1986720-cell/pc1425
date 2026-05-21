@@ -35,7 +35,7 @@
     }
 
     .terminal-nav {
-      margin: 20px 0 40px 0;
+      margin: 20px 0 30px 0; /* 縮小導覽列上下間距 */
       padding: 10px;
       border: 1px dashed #333;
       display: flex;
@@ -72,18 +72,18 @@
     h1 {
       font-size: 28px;
       color: #00ff66;
-      margin-bottom: 20px;
+      margin-bottom: 15px; /* 縮減標題下間距 */
     }
 
     h2 {
       font-size: 20px;
       color: #00ccff;
-      margin-top: 30px;
-      margin-bottom: 15px;
+      margin-top: 25px; /* 縮減標題上間距 */
+      margin-bottom: 12px;
     }
 
     p, .output-list {
-      margin-bottom: 25px;
+      margin-bottom: 15px; /* 全域段落間距由 25px 縮小至 15px */
       color: #cbd5e1;
     }
 
@@ -93,7 +93,7 @@
     }
 
     .output-list li {
-      margin-bottom: 14px;
+      margin-bottom: 10px; /* 列表項目間距微調 */
       position: relative;
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -130,7 +130,7 @@
     }
 
     .epic-incidents-container {
-      margin-bottom: 25px;
+      margin-bottom: 15px; /* 縮減迷因區塊下間距 */
       font-size: 14px;
       font-style: italic;
       line-height: 1.8;
@@ -147,11 +147,11 @@
     }
 
     footer {
-      margin-top: 60px;
+      margin-top: 30px; /* 🛠️ 大幅縮減頁尾頂部間距（原本為 60px），讓版權宣告緊跟著指令列 */
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
-      padding-top: 20px;
+      padding-top: 15px;
     }
 
     @keyframes fadeIn {
@@ -169,7 +169,7 @@
 
 <div class="terminal">
 
-  <div class="boot-sequence" style="font-size:14px; margin-bottom:30px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
+  <div class="boot-sequence" style="font-size:14px; margin-bottom:25px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
     <p style="color:#555; animation-delay:0.1s;">[0.000000] Booting Linux kernel v6.12.0-ext... (Please don't touch anything)</p>
     <p style="color:#cbd5e1; animation-delay:0.3s;">[<span style="color:#00ff66;">OK</span>] Shifting blame to the Network Team...</p>
     <p style="color:#ff0055; animation-delay:0.5s;">[<span style="color:#ff0055;">CRITICAL</span>] CrowdStrike Falcon Sensor updated.</p>
@@ -189,10 +189,10 @@
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
     <div id="about" class="tab-content active">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
       
-      <p style="margin-bottom: 20px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.7;">
-        我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷與專業認證。深知資安領域浩瀚，我始終保持緊迫感並持續在實戰中精進，誠摯歡迎各位前輩指導與鞭策。
+      <p style="margin-bottom: 12px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.6;">
+        我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷、技術沉澱與專業認證。資安與網路領域浩瀚無垠，我始終保持不進則退的緊迫感，持續在實戰中精進。若有不足之處，誠摯歡迎各位前輩指導與鞭策。
       </p>
       
       <div class="epic-incidents-container">
@@ -201,8 +201,8 @@
         <p style="margin-bottom: 0;">/* <span style="color: #00ff66; font-weight: bold;">Global BGP Routing & Ivanti VPN</span> // 那些在 2025-2026 年被勒索軟體點名、連夜拔掉網路線、徹夜在機房重構骨幹架構的維運肝臟。 */</p>
       </div>
       
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
-      <p id="current-date" style="margin-bottom: 25px; color: #72809e; font-weight: bold;"></p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
+      <p id="current-date" style="margin-bottom: 15px; color: #72809e; font-weight: bold;"></p>
 
       <h1>CYBER SECURITY PORTFOLIO</h1>
       <p>
@@ -213,7 +213,7 @@
     </div>
 
     <div id="skills" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
       <h2>[ Skills Matrix ]</h2>
       <ul class="output-list">
         <li><span class="item-title">Security Governance</span> - ISO 27001 & ISO 27701 資訊安全與隱私管理體系導入、稽核與決策規劃</li>
@@ -224,11 +224,11 @@
     </div>
 
     <div id="certs" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
       
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Information Security & Governance */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Information Security & Governance */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">ISO 27001:2022 LA</span> - 資訊安全管理系統主導稽核員</li>
         <li><span class="item-title">IEC 62443-2-1 LA</span> - 工業自動化與控制系統資安方案主導稽核員</li>
         <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
@@ -237,14 +237,14 @@
         <li><span class="item-title">Fortinet NSE 4</span> - Network Security Professional 網路安全專家</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Network & Infrastructure */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Network & Infrastructure */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">CCNP Enterprise</span> - Cisco Certified Network Professional 專業級網路工程師</li>
         <li><span class="item-title">CCNA</span> - Cisco Certified Network Associate 網路工程師</li>
         <li><span class="item-title">Aruba ACMA</span> - Aruba Certified Mobility Associate 無線網路工程師</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Virtualization & Development */</p>
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Virtualization & Development */</p>
       <ul class="output-list">
         <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
         <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
@@ -252,10 +252,10 @@
     </div>
 
     <div id="experience" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
       
       <h2>[ Academic Background ]</h2>
-      <ul class="output-list" style="margin-bottom: 40px;">
+      <ul class="output-list" style="margin-bottom: 25px;">
         <li>
           <span class="item-title">資訊工程系 畢業 (最高學歷)</span> @ 大漢技術學院 <span class="timeline-date">(2004/09 - 2008/07)</span>
           <br>奠定計算機概論、作業系統底層、資料結構與網路通訊協定之紮實基礎。
@@ -270,7 +270,7 @@
       <ul class="output-list">
         <li>
           <span class="item-title">資安暨資訊工程師</span> @ B級公務機關醫院 <span class="timeline-date">(2023/03 - Present)</span>
-          <br>負責公立醫院醫療資訊系統安全維運，執行資通安全管理法合規稽核（ISO 27001 / 27701 治理決策），維護關鍵基礎設施安全。
+          <br>負責公立醫院醫療資訊系統安全維運，執行資通安全管理法合規稽核（ISO 27001 / 27701 治理決策），維護關鍵基礎設施安全.
         </li>
         <li>
           <span class="item-title">網路管理工程師</span> @ 中央研究院計算中心 <span class="timeline-date">(2022/02 - 2023/02)</span>
@@ -314,17 +314,17 @@
     </div>
 
     <div id="labs" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
       
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Network Security & Hybrid Simulation */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Network Security & Hybrid Simulation */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。</li>
         <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。</li>
         <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* NetDevOps & SecOps Automation */</p>
+      <p style="color: #00ccff; margin-bottom: 4px;">/* NetDevOps & SecOps Automation */</p>
       <ul class="output-list">
         <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
         <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
@@ -333,7 +333,7 @@
       </ul>
     </div>
     
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
+    <p style="margin-bottom: 0;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
 
   </div>
 
