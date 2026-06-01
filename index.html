@@ -12,17 +12,27 @@
       box-sizing: border-box;
     }
 
+    /* 🎯 強制全網頁鎖死在一畫面，絕不出現下拉滾動條 */
     body {
       background-color: #0a0a0a;
       color: #a9b1d6;
       font-family: 'Courier New', Courier, monospace, "Microsoft JhengHei";
-      line-height: 1.6;
-      padding: 40px 20px;
+      line-height: 1.5;
+      padding: 30px 20px;
+      height: 100vh;
+      overflow: hidden; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .terminal {
       max-width: 1100px;
       margin: 0 auto;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .prompt {
@@ -35,8 +45,8 @@
     }
 
     .terminal-nav {
-      margin: 20px 0 30px 0;
-      padding: 10px;
+      margin: 15px 0 20px 0;
+      padding: 8px;
       border: 1px dashed #333;
       display: flex;
       gap: 15px;
@@ -48,7 +58,7 @@
       background: none;
       border: none;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       padding: 2px 8px;
       transition: all 0.2s;
@@ -60,45 +70,53 @@
       font-weight: bold;
     }
 
+    /* 讓內容區填滿剩餘的垂直空間 */
+    .tab-container-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
     .tab-content {
       display: none;
-      animation: fadeIn 0.3s ease-in-out;
+      height: 100%;
     }
 
     .tab-content.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 26px;
       color: #00ff66;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 20px;
+      font-size: 18px;
       color: #00ccff;
-      margin-top: 25px;
+      margin-top: 10px;
       margin-bottom: 12px;
     }
 
     p, .output-list {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       color: #cbd5e1;
     }
 
     .output-list {
       list-style: none;
       padding-left: 20px;
+      overflow-y: auto;
     }
 
     .output-list li {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       position: relative;
       word-break: break-word;
       overflow-wrap: anywhere;
-      text-align: justify;
-      text-justify: inter-ideograph;
     }
 
     .output-list li::before {
@@ -130,97 +148,77 @@
     }
 
     .epic-incidents-container {
-      margin-bottom: 15px;
-      font-size: 14px;
+      margin-bottom: 12px;
+      font-size: 13px;
       font-style: italic;
-      line-height: 1.8;
+      line-height: 1.6;
       color: #555;
       padding-left: 15px;
       white-space: nowrap;
       overflow-x: auto;
-      scrollbar-width: none; 
-      -ms-overflow-style: none; 
+      scrollbar-width: none;
     }
 
     .epic-incidents-container::-webkit-scrollbar {
       display: none;
     }
 
-    /* 📸 絕對同步流：右框高度靈魂附體於左照片 */
+    /* 📸 終極一畫面同步佈局：文字撐開高度，照片完美原比例配合 */
     .gallery-container {
       display: flex;
       gap: 25px;
       width: 100%;
-      margin-top: 20px;
-      position: relative;       /* 讓右邊可以進行絕對定位 */
-      align-items: flex-start;  /* 讓左邊照片保持最純粹的原始比例高度 */
+      align-items: stretch; /* 讓左右外框高度維持絕對相等 */
+      flex: 1;
+      min-height: 0;       /* 阻止 Flexbox 內容溢出 */
+      margin-bottom: 15px;
     }
 
+    /* 左側照片外框：高度由右側文字決定 */
     .photo-section {
-      width: 320px;            /* 鎖定你最舒適的照片寬度 */
+      width: 320px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
+      height: 100%;
     }
 
     .photo-wrapper {
       width: 100%;
+      height: 100%;        /* 完美填滿網格高度 */
       border: 1px solid #333;
       background-color: #0a0a0a;
       overflow: hidden;
       border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .photo-wrapper img {
-      width: 100% !important;
-      height: auto !important;  /* 恢復 auto！確保照片完全不變形、不被強制裁切 */
-      display: block;          /* 砍掉 inline 幽靈黑邊 */
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* 💡 關鍵：照片原比例完整呈現！不裁切、不變形、不縮小 */
+      display: block;
       filter: grayscale(15%) brightness(95%);
-      transition: filter 0.3s;
     }
 
-    .photo-wrapper img:hover {
-      filter: none;
-    }
-
-    .photo-caption {
-      text-align: center;
-      margin-top: 12px;
-      color: #a9b1d6;
-      font-size: 14px;
-    }
-
-    /* 💡 右側內容框：用 Absolute 直接吸附左側算出來的精準照片高度 */
-    .text-section-wrapper {
-      flex: 1;
-      position: relative;      /* 建立絕對定位的老爸節點 */
-    }
-
+    /* 右側實體內容框：負責把高度撐開 */
     .text-section {
-      position: absolute;      /* 幽靈化！ */
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;               /* 完美貼緊上下緣，高度跟左邊照片一模一樣 */
+      flex: 1;
       background-color: #111219;
-      border: 1px dashed #333;  /* 你最愛的經典虛線外框 */
-      padding: 20px;
+      border: 1px dashed #333; /* 經典虛線外框 */
+      padding: 22px;
       border-radius: 4px;
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 內容垂直居中，再也不怕文字空隙 */
-      overflow-y: auto;        /* 萬一縮小到文字擠爆，會自動出捲軸而不破版 */
-      scrollbar-width: none;   /* 隱藏捲軸線 */
-    }
-    
-    .text-section::-webkit-scrollbar {
-      display: none;
+      justify-content: center; /* 內文垂直完美居中 */
     }
 
     .mentor-box {
       border-left: 3px solid #e0af68;
       padding-left: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .mentor-box:last-child {
@@ -228,11 +226,11 @@
     }
 
     footer {
-      margin-top: 40px;
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
-      padding-top: 15px;
+      padding-top: 10px;
+      width: 100%;
     }
 
     @keyframes fadeIn {
@@ -241,27 +239,7 @@
     }
 
     .boot-sequence p {
-      margin-bottom: 4px;
-      animation: fadeIn 0.4s ease-in-out both;
-    }
-
-    /* 手機版 RWD 兼容 */
-    @media (max-width: 768px) {
-      .gallery-container {
-        flex-direction: column;
-      }
-      .photo-section {
-        width: 100%;
-      }
-      .text-section-wrapper {
-        width: 100%;
-        height: auto;
-      }
-      .text-section {
-        position: relative;
-        top: auto; left: auto; right: auto; bottom: auto;
-        margin-top: 15px;
-      }
+      margin-bottom: 2px;
     }
   </style>
 </head>
@@ -269,16 +247,16 @@
 
 <div class="terminal">
 
-  <div class="boot-sequence" style="font-size:14px; margin-bottom:25px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
-    <p style="color:#555; animation-delay:0.1s;">[0.000000] Booting Linux kernel v6.12.0-ext... (Please don't touch anything)</p>
-    <p style="color:#cbd5e1; animation-delay:0.3s;">[<span style="color:#00ff66;">OK</span>] Shifting blame to the Network Team...</p>
-    <p style="color:#ff0055; animation-delay:0.5s;">[<span style="color:#ff0055;">CRITICAL</span>] CrowdStrike Falcon Sensor updated.</p>
-    <p style="color:#ff0055; animation-delay:0.7s;">[<span style="color:#ff0055;">FATAL</span>] Loading C-00000291.sys... Logic error detected.</p>
-    <p style="color:#00ccff; animation-delay:0.9s;">[SYSTEM] Ready to trigger global BSOD. Generating job security for IT administrators...</p>
-    <p style="color:#ffcc00; animation-delay:1.1s;">[INFO] Recovery mode: Booting into Safe Mode and deleting the channel file. Welcome back, PC.</p>
+  <div class="boot-sequence" style="font-size:13px; margin-bottom:15px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
+    <p style="color:#555;">[0.000000] Booting Linux kernel v6.12.0-ext... (Please don't touch anything)</p>
+    <p style="color:#cbd5e1;">[<span style="color:#00ff66;">OK</span>] Shifting blame to the Network Team...</p>
+    <p style="color:#ff0055;">[<span style="color:#ff0055;">CRITICAL</span>] CrowdStrike Falcon Sensor updated.</p>
+    <p style="color:#ff0055;">[<span style="color:#ff0055;">FATAL</span>] Loading C-00000291.sys... Logic error detected.</p>
+    <p style="color:#00ccff;">[SYSTEM] Ready to trigger global BSOD. Generating job security for IT administrators...</p>
+    <p style="color:#ffcc00;">[INFO] Recovery mode: Booting into Safe Mode and deleting the channel file. Welcome back, PC.</p>
   </div>
 
-  <div class="terminal-nav" style="animation:fadeIn 0.3s ease-in-out 1.3s both;">
+  <div class="terminal-nav">
     <button class="nav-btn" onclick="switchTab(event, 'about')">[1] About</button>
     <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
     <button class="nav-btn" onclick="switchTab(event, 'certs')">[3] Certifications</button>
@@ -287,7 +265,7 @@
     <button class="nav-btn active" onclick="switchTab(event, 'gallery')">[6] Gallery</button>
   </div>
 
-  <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
+  <div class="tab-container-main">
 
     <div id="about" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
@@ -296,13 +274,13 @@
       </p>
       
       <div class="epic-incidents-container">
-        <p style="margin-bottom: 5px;">/* <span style="color: #00ff66; font-weight: bold;">R.I.P. C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys</span> // 謝謝你用一隻空指標，在 2024.07.19 物理超渡了全球 850 萬台伺服器。 */</p>
-        <p style="margin-bottom: 5px;">/* <span style="color: #00ff66; font-weight: bold;">liblzma.so (CVE-2024-3094)</span> // 那個潛伏兩年、差點用一個 SSH 後門綁架全人類 Linux 伺服器的神秘工程師 "Jia Tan"。 */</p>
+        <p style="margin-bottom: 3px;">/* <span style="color: #00ff66; font-weight: bold;">R.I.P. C:\Windows\System32\drivers\CrowdStrike\C-00000291*.sys</span> // 謝謝你用一隻空指標，在 2024.07.19 物理超渡了全球 850 萬台伺服器。 */</p>
+        <p style="margin-bottom: 3px;">/* <span style="color: #00ff66; font-weight: bold;">liblzma.so (CVE-2024-3094)</span> // 那個潛伏兩年、差點用一個 SSH 後門綁架全人類 Linux 伺服器的神秘工程師 "Jia Tan"。 */</p>
         <p style="margin-bottom: 0;">/* <span style="color: #00ff66; font-weight: bold;">Global BGP Routing & Ivanti VPN</span> // 那些在 2025-2026 年被勒索軟體點名、連夜拔掉網路線、徹夜在機房重構骨幹架構的維運肝臟。 */</p>
       </div>
       
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
-      <p id="current-date" style="margin-bottom: 15px; color: #72809e; font-weight: bold;"></p>
+      <p id="current-date" style="margin-bottom: 12px; color: #72809e; font-weight: bold;"></p>
 
       <h1>CYBER SECURITY PORTFOLIO</h1>
       <p>
@@ -326,110 +304,77 @@
     <div id="certs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
-      
-      <p style="color: #00ccff; margin-bottom: 4px;">/* Information Security & Governance */</p>
-      <ul class="output-list" style="margin-bottom: 15px;">
-        <li><span class="item-title">ISO 27001:2022 LA</span> - 資訊安全管理系統主導稽核員</li>
-        <li><span class="item-title">IEC 62443-2-1 LA</span> - 工業自動化與控制系統資安方案主導稽核員</li>
-        <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
-        <li><span class="item-title">ECSA</span> - EC-Council Certified Security Analyst 資安分析專家</li>
-        <li><span class="item-title">ECIH</span> - Incident Handling and Response, IHR 資安事件危機處理與回應</li>
-        <li><span class="item-title">Fortinet NSE 4</span> - Network Security Professional 網路安全專家</li>
-      </ul>
+      <div style="flex: 1; overflow-y: auto; padding-right: 5px;">
+        <p style="color: #00ccff; margin-bottom: 4px;">/* Information Security & Governance */</p>
+        <ul class="output-list" style="margin-bottom: 15px;">
+          <li><span class="item-title">ISO 27001:2022 LA</span> - 資訊安全管理系統主導稽核員</li>
+          <li><span class="item-title">IEC 62443-2-1 LA</span> - 工業自動化與控制系統資安方案主導稽核員</li>
+          <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
+          <li><span class="item-title">ECSA</span> - EC-Council Certified Security Analyst 資安分析專家</li>
+          <li><span class="item-title">ECIH</span> - Incident Handling and Response, IHR 資安事件危機處理與回應</li>
+          <li><span class="item-title">Fortinet NSE 4</span> - Network Security Professional 網路安全專家</li>
+        </ul>
 
-      <p style="color: #00ccff; margin-bottom: 4px;">/* Network & Infrastructure */</p>
-      <ul class="output-list" style="margin-bottom: 15px;">
-        <li><span class="item-title">CCNP Enterprise</span> - Cisco Certified Network Professional 專業級網路工程師</li>
-        <li><span class="item-title">CCNA</span> - Cisco Certified Network Associate 網路工程師</li>
-        <li><span class="item-title">Aruba ACMA</span> - Aruba Certified Mobility Associate 無線網路工程師</li>
-      </ul>
+        <p style="color: #00ccff; margin-bottom: 4px;">/* Network & Infrastructure */</p>
+        <ul class="output-list" style="margin-bottom: 15px;">
+          <li><span class="item-title">CCNP Enterprise</span> - Cisco Certified Network Professional 專業級網路工程師</li>
+          <li><span class="item-title">CCNA</span> - Cisco Certified Network Associate 網路工程師</li>
+          <li><span class="item-title">Aruba ACMA</span> - Aruba Certified Mobility Associate 無線網路工程師</li>
+        </ul>
 
-      <p style="color: #00ccff; margin-bottom: 4px;">/* Virtualization & Development */</p>
-      <ul class="output-list">
-        <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
-        <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
-      </ul>
+        <p style="color: #00ccff; margin-bottom: 4px;">/* Virtualization & Development */</p>
+        <ul class="output-list">
+          <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
+          <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
+        </ul>
+      </div>
     </div>
 
     <div id="experience" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
-      
-      <h2>[ Academic Background ]</h2>
-      <ul class="output-list" style="margin-bottom: 25px;">
-        <li>
-          <span class="item-title">資訊工程系 畢業 (最高學歷)</span> @ 大漢技術學院 <span class="timeline-date">(2004/09 - 2008/07)</span>
-          <br>奠定計算機概論、作業系統底層、資料結構與網路通訊協定之紮實基礎。
-        </li>
-        <li>
-          <span class="item-title">大數據系統網路工程師 結業</span> @ 資策會數位教育研究所 <span class="timeline-date">(2016/06 - 2016/12)</span>
-          <br>進階專修：進階網路工程、微軟系統（Windows Server/AD）與開放系統（Linux/Unix）架構整合、異質平台封包分析（Packet Analysis）及大數據分析基礎技術。
-        </li>
-      </ul>
+      <div style="flex: 1; overflow-y: auto; padding-right: 5px;">
+        <h2>[ Academic Background ]</h2>
+        <ul class="output-list" style="margin-bottom: 15px;">
+          <li>
+            <span class="item-title">資訊工程系 畢業 (最高學歷)</span> @ 大漢技術學院 <span class="timeline-date">(2004/09 - 2008/07)</span>
+            <br>奠定計算機概論、作業系統底層、資料結構與網路通訊協定之紮實基礎。
+          </li>
+          <li>
+            <span class="item-title">大數據系統網路工程師 結業</span> @ 資策會數位教育研究所 <span class="timeline-date">(2016/06 - 2016/12)</span>
+            <br>進階專修：進階網路工程、微軟系統（Windows Server/AD）與開放系統（Linux/Unix）架構整合、異質平台封包分析（Packet Analysis）及大數據分析基礎技術。
+          </li>
+        </ul>
 
-      <h2>[ Work Experience (Total: 10-15 Years) ]</h2>
-      <ul class="output-list">
-        <li>
-          <span class="item-title">資安暨資訊工程師</span> @ B級公務機關醫院 <span class="timeline-date">(2023/03 - Present)</span>
-          <br>負責公立醫院醫療資訊系統安全維運，執行資通安全管理法合規稽核（ISO 27001 / 27701 治理決策），維護關鍵基礎設施安全。
-        </li>
-        <li>
-          <span class="item-title">網路管理工程師</span> @ 中央研究院計算中心 <span class="timeline-date">(2022/02 - 2023/02)</span>
-          <br>負責國家級研究機構（500人以上環境）跨院區及各系所骨幹網路維護與架構規劃。
-          <br><span style="color: #555;">└─</span> 運用 <span class="project-tag">LibreNMS / Zabbix</span> 進行核心設備與系統監控，使用 <span class="project-tag">phpipam</span> 整合院區 IP 資源。
-          <br><span style="color: #555;">└─</span> 管理控制 <span class="project-tag">Fortinet</span> 防火牆 Policy 策略安全設定，建置與控管跨院區 <span class="project-tag">Aruba</span> 無線網路。
-          <br><span style="color: #555;">└─</span> 主導機房核心網路設備採購案、院區大型網路交換器更新專案，並操作 <span class="project-tag">Fluke / LinkRunner</span> 進行實體光纖骨幹檢測。
-        </li>
-        <li>
-          <span class="item-title">網路管理工程師 (資訊專員)</span> @ 國泰健康管理顧問 <span class="timeline-date">(2021/09 - 2022/02)</span>
-          <br>主導全台多據點網路安全與機房虛擬化整合專案。
-          <br><span style="color: #555;">└─</span> 經辦全台據點防火牆汰換升級（部署 <span class="project-tag">Fortinet 401E / 101F, SD-WAN, Site-to-Site IPsec VPN</span> 與 <span class="project-tag">FortiAnalyzer</span>）。
-          <br><span style="color: #555;">└─</span> 獨立負責 <span class="project-tag">Pulse Secure VPN</span> 安全存取架構之規劃與建置。
-          <br><span style="color: #555;">└─</span> 主責新據點（內湖產後中心）整體網路及系統架構規劃。
-        </li>
-        <li>
-          <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
-          <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運.
-          <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。
-          <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
-          <br><span style="color: #555;">└─</span> <span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。
-          <br><span style="color: #555;">└─</span> <span class="item-title">核心專案：</span>參與頻寬管理專案、<span class="project-tag">CyberArk</span> 特權帳號專案、端點端到端加密（E2EE）專案與異地備援規劃。
-        </li>
-        <li>
-          <span class="item-title">技術顧問工程師 (FAE)</span> @ 曜祥網技 <span class="timeline-date">(2016/12 - 2019/02)</span>
-          <br>擔任資安前端技術顧問，負責大型金融、政府與指標性企業客戶資安防禦系統與資安合規建置專案（SIP / GCB）。
-        </li>
-        <li>
-          <span class="item-title">維護工程師 (MIS)</span> @ 山富國際旅行社 <span class="timeline-date">(2014/11 - 2016/06)</span>
-          <br>維護全台大型電商旅遊平台機房架裝，主導多項企業級核心基礎設施現代化升級專案。
-        </li>
-        <li>
-          <span class="item-title">程式設計師</span> @ 泓準資訊 <span class="timeline-date">(2012/02 - 2014/10)</span>
-          <br>兼管系統維運之 MIS 程式工程師，負責網際網路平台之核心代碼撰寫與後端資料庫優化。
-        </li>
-        <li>
-          <span class="item-title">維修測試工程師</span> @ 歆宇科技 <span class="timeline-date">(2010/07 - 2012/02)</span>
-          <br>底層硬體架構維護、硬體相容性測試與系統基礎建置。
-        </li>
-      </ul>
+        <h2>[ Work Experience (Total: 10-15 Years) ]</h2>
+        <ul class="output-list">
+          <li>
+            <span class="item-title">資安暨資訊工程師</span> @ B級公務機關醫院 <span class="timeline-date">(2023/03 - Present)</span>
+            <br>負責公立醫院醫療資訊系統安全維運，執行資通安全管理法合規稽核（ISO 27001 / 27701 治理決策），維護關鍵基礎設施安全。
+          </li>
+          <li>
+            <span class="item-title">網路管理工程師</span> @ 中央研究院計算中心 <span class="timeline-date">(2022/02 - 2023/02)</span>
+            <br>負責國家級研究機構跨院區及各系所骨幹網路維護與架構規劃。
+          </li>
+          <li>
+            <span class="item-title">網路管理工程師 (資訊專員)</span> @ 國泰健康管理顧問 <span class="timeline-date">(2021/09 - 2022/02)</span>
+            <br>主導全台多據點網路安全與機房虛擬化整合專案。
+          </li>
+          <li>
+            <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
+            <br>負責金融體系高合規要求的網路、系統與資安防禦維運。
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div id="labs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
-      
-      <p style="color: #00ccff; margin-bottom: 4px;">/* Network Security & Hybrid Simulation */</p>
-      <ul class="output-list" style="margin-bottom: 15px;">
+      <ul class="output-list">
         <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。</li>
         <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。</li>
-        <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。</li>
-      </ul>
-
-      <p style="color: #00ccff; margin-bottom: 4px;">/* NetDevOps & SecOps Automation */</p>
-      <ul class="output-list">
-        <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
-        <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
-        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
-        <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
+        <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機零開始部署。</li>
+        <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報，實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
 
@@ -440,31 +385,28 @@
       <div class="gallery-container">
         <div class="photo-section">
           <div class="photo-wrapper">
-            <img src="https://inmywordz.com/wp-content/uploads/20220918101811_13.jpg" alt="PC's Profile Photo">
+            <img src="https://inmywordz.com/wp-content/uploads/20220918101811_13.jpg" alt="Profile Photo">
           </div>
-          <div class="photo-caption">PC // User Profile</div>
         </div>
 
-        <div class="text-section-wrapper">
-          <div class="text-section">
-            <div class="mentor-box">
-              <h3 style="color: #e0af68; font-size: 16px; margin-bottom: 8px;">[ 恩師與職涯先進 ]</h3>
-              <p style="color: #cbd5e1; font-size: 14px; line-height: 1.7; margin-bottom: 0;">
-                技術的傳承與思維的啟發，皆源自於職涯路上多位優秀前輩與恩師的無私指導。
-                無論是在實務維運、資安合規治理，亦或是宏觀的架構設計上，
-                每一份嚴格督促與提攜，都是我能持續在技術道路上不斷向前的核心動力。
-                銘記於心，持續精進。
-              </p>
-            </div>
-            
-            <div class="mentor-box" style="border-left-color: #00ccff; padding-left: 15px; margin-bottom: 0;">
-              <ul style="list-style: none; padding-left: 0; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-                <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
-                <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
-                <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
-                <li style="margin-bottom: 0;"><span style="color: #555;">└─</span> <span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
-              </ul>
-            </div>
+        <div class="text-section">
+          <div class="mentor-box">
+            <h3 style="color: #e0af68; font-size: 15px; margin-bottom: 6px;">[ 恩師與職涯先進 ]</h3>
+            <p style="color: #cbd5e1; font-size: 14px; line-height: 1.6; margin-bottom: 0; text-align: justify;">
+              技術的傳承與思維的啟發，皆源自於職涯路上多位優秀前輩與恩師的無私指導。
+              無論是在實務維運、資安合規治理，亦或是宏觀的架構設計上，
+              每一份嚴格督促與提攜，都是我能持續在技術道路上不斷向前的核心動力。
+              銘記於心，持續精進。
+            </p>
+          </div>
+          
+          <div class="mentor-box" style="border-left-color: #00ccff; padding-left: 15px; margin-bottom: 0;">
+            <ul style="list-style: none; padding-left: 0; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.7;">
+              <li style="margin-bottom: 4px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
+              <li style="margin-bottom: 4px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
+              <li style="margin-bottom: 4px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
+              <li style="margin-bottom: 0;"><span style="color: #555;">└─</span> <span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -497,46 +439,17 @@
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
-    const dayName = days[now.getDay()];
-    const monthName = months[now.getMonth()];
-    const dayNum = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const year = now.getFullYear();
-    
-    return `${dayName} ${monthName} ${dayNum} ${hours}:${minutes}:${seconds} CST ${year}`;
-  }
-
-  function typeEffect(elementId, text, speed, callback) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    
-    let i = 0;
-    element.textContent = "";
-    
-    function typing() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(typing, speed);
-      } else if (callback) {
-        callback();
-      }
-    }
-    typing();
+    return `${days[now.getDay()]} ${months[now.getMonth()]} ${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} CST ${now.getFullYear()}`;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const initialTime = getLinuxDateString();
-    typeEffect('current-date', initialTime, 20, () => {
+    const target = document.getElementById('current-date');
+    if (target) {
+      target.textContent = getLinuxDateString();
       setInterval(() => {
-        const target = document.getElementById('current-date');
-        if (target) {
-          target.textContent = getLinuxDateString();
-        }
+        target.textContent = getLinuxDateString();
       }, 1000);
-    });
+    }
   });
 </script>
 
