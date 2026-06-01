@@ -146,23 +146,24 @@
       display: none;
     }
 
-    /* 📸 照片與區塊專用樣式 - 修正爆版與間距 */
+    /* 📸 照片與區塊專用樣式 - 完美修正爆版與寬度自訂 */
     .gallery-container {
       display: flex;
       gap: 30px;
       flex-wrap: wrap;
       margin-top: 20px;
-      margin-bottom: 25px;
       width: 100%;
     }
 
     .photo-section {
+      /* 💡 調整整個照片「區塊總寬度」的地方 */
       width: 230px; 
       text-align: center;
     }
 
     .photo-wrapper {
       width: 100%;
+      /* 💡 調整照片「高度」的地方 */
       height: 265px; 
       overflow: hidden;
       border: 1px solid #333;
@@ -175,11 +176,12 @@
     }
 
     .photo-wrapper img {
+      /* 確保圖片高寬牢牢鎖死在格子內，不往右衝破爆版 */
       width: 100% !important;
       height: 100% !important;
       max-width: 100% !important;
       max-height: 100% !important;
-      object-fit: cover;
+      object-fit: cover; /* 保持原比例縮放，多餘的部分自動裁切，不壓扁變形 */
       filter: grayscale(20%) brightness(90%);
       transition: filter 0.3s;
     }
@@ -200,7 +202,7 @@
       border: 1px dashed #333;
       padding: 20px;
       border-radius: 4px;
-      height: min-content;
+      height: min-content; /* 確保文字框會隨內容高度自動增長，不再跑出背景 */
     }
 
     .mentor-box {
@@ -214,7 +216,7 @@
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 30px;
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
@@ -246,17 +248,18 @@
   </div>
 
   <div class="terminal-nav" style="animation:fadeIn 0.3s ease-in-out 1.3s both;">
-    <button class="nav-btn" onclick="switchTab(event, 'about')">[1] About</button>
+    <button class="nav-btn active" onclick="switchTab(event, 'about')">[1] About</button>
     <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
     <button class="nav-btn" onclick="switchTab(event, 'certs')">[3] Certifications</button>
     <button class="nav-btn" onclick="switchTab(event, 'experience')">[4] Experience</button>
     <button class="nav-btn" onclick="switchTab(event, 'labs')">[5] Labs</button>
-    <button class="nav-btn active" onclick="switchTab(event, 'gallery')">[6] Gallery</button>
+    <button class="nav-btn" onclick="switchTab(event, 'gallery')">[6] Gallery</button>
   </div>
 
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
-    <div id="about" class="tab-content">
+    <!-- [1] About Tab -->
+    <div id="about" class="tab-content active">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
       <p style="margin-bottom: 12px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.6;">
         我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷、技術沉澱與專業認證。資安與網路領域浩瀚無垠，我始終保持不進則退的緊迫感，持續在實戰中精進。若有不足之處，誠摯歡迎各位前輩指導與鞭策。
@@ -279,6 +282,7 @@
       </p>
     </div>
 
+    <!-- [2] Skills Tab -->
     <div id="skills" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
       <h2>[ Skills Matrix ]</h2>
@@ -290,6 +294,7 @@
       </ul>
     </div>
 
+    <!-- [3] Certifications Tab -->
     <div id="certs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
@@ -313,11 +318,12 @@
 
       <p style="color: #00ccff; margin-bottom: 4px;">/* Virtualization & Development */</p>
       <ul class="output-list">
-        <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛慢化專家</li>
+        <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
         <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
       </ul>
     </div>
 
+    <!-- [4] Experience Tab -->
     <div id="experience" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
       
@@ -380,6 +386,7 @@
       </ul>
     </div>
 
+    <!-- [5] Labs Tab -->
     <div id="labs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
@@ -394,13 +401,14 @@
       <p style="color: #00ccff; margin-bottom: 4px;">/* NetDevOps & SecOps Automation */</p>
       <ul class="output-list">
         <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
-        <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
+        <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制.</li>
         <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
         <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
 
-    <div id="gallery" class="tab-content active">
+    <!-- [6] Gallery Tab -->
+    <div id="gallery" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat templates/mentors.md</p>
       <h2>[ Profile & Mentor Info ]</h2>
       
@@ -423,21 +431,20 @@
             </p>
           </div>
 
+          <!-- 💡 重點恩師名單：使用樹狀結構排版，凸顯專業感 -->
           <div class="mentor-box" style="border-left-color: #00ccff; padding-left: 15px;">
             <ul style="list-style: none; padding-left: 0; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-              <li style="margin-bottom: 6px;"><span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
-              <li style="margin-bottom: 6px;"><span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
-              <li style="margin-bottom: 6px;"><span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
-              <li style="margin-bottom: 0;"><span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
+              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
+              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
+              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
+              <li style="margin-bottom: 0;"><span style="color: #555;">└─</span> <span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
             </ul>
           </div>
         </div>
       </div>
     </div>
     
-    <div style="margin-top: 35px;">
-      <p style="margin-bottom: 0;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
-    </div>
+    <p style="margin-bottom: 0;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
 
   </div>
 
