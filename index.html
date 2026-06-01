@@ -146,12 +146,12 @@
       display: none;
     }
 
-    /* 📸 終極完美對齊與乾淨設定區塊 */
+    /* 📸 Gallery 終極視覺優化排版 */
     .gallery-container {
       display: flex;
-      gap: 25px;
+      gap: 35px;
       width: 100%;
-      align-items: stretch; /* 👈 核心：強迫左右兩區塊完全等高 */
+      align-items: flex-start; /* 順應兩側內容自然高度 */
       margin-top: 20px;
     }
 
@@ -164,22 +164,21 @@
 
     .photo-wrapper {
       width: 100%;
-      flex: 1;             /* 👈 核心：讓照片區完美填滿到跟右邊等高 */
       overflow: hidden;
-      border: 1px solid #333;
-      background-color: #1a1b26;
+      /* 💡 左側照片框改用俐落的雙邊夾擊線條，呼應終格調 */
+      border-left: 2px solid #333;
+      border-right: 2px solid #333;
+      background-color: #0a0a0a;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
     }
 
     .photo-wrapper img {
       width: 100% !important;
-      height: 100% !important;
-      object-fit: cover;   /* 👈 防止變形、完美裁切充填 */
-      display: block;      /* 👈 關鍵：消滅底部神祕的 4px 空隙，做到絕對切齊 */
-      filter: grayscale(15%) brightness(95%);
+      height: auto !important;
+      display: block;
+      filter: grayscale(10%) brightness(95%);
       transition: filter 0.3s;
     }
 
@@ -189,26 +188,25 @@
 
     .photo-caption {
       text-align: center;
-      margin-top: 12px;   /* 👈 將文字標題拉到外框外面，不干擾等高對齊計算 */
-      color: #a9b1d6;
+      margin-top: 15px;
+      color: #72809e;
       font-size: 14px;
+      font-weight: bold;
     }
 
     .text-section {
       flex: 1;
-      background-color: #111219;
-      border: 1px dashed #333;
-      padding: 22px;
-      border-radius: 4px;
+      padding: 5px 0 5px 25px;
+      /* 💡 移除原本死板的封閉虛線外框，改用高質感的左側裝飾線，徹底解決下緣落差問題 */
+      border-left: 1px dashed #333; 
       display: flex;
       flex-direction: column;
-      justify-content: center; /* 讓右側文字垂直居中排版，視覺上更平衡 */
     }
 
     .mentor-box {
       border-left: 3px solid #e0af68;
       padding-left: 15px;
-      margin-bottom: 22px;
+      margin-bottom: 25px;
     }
 
     .mentor-box:last-child {
@@ -216,7 +214,7 @@
     }
 
     footer {
-      margin-top: 30px;
+      margin-top: 50px;
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
@@ -233,16 +231,19 @@
       animation: fadeIn 0.4s ease-in-out both;
     }
 
-    /* 手機板響應式兼容：當螢幕太小時改為上下排列 */
     @media (max-width: 768px) {
       .gallery-container {
         flex-direction: column;
+        gap: 20px;
       }
       .photo-section {
         width: 100%;
       }
-      .photo-wrapper {
-        height: 350px;
+      .text-section {
+        border-left: none;
+        padding-left: 0;
+        padding-top: 15px;
+        border-top: 1px dashed #333;
       }
     }
   </style>
@@ -432,7 +433,7 @@
             <h3 style="color: #e0af68; font-size: 16px; margin-bottom: 8px;">[ 恩師與職涯先進 ]</h3>
             <p style="color: #cbd5e1; font-size: 14px; line-height: 1.7; margin-bottom: 0;">
               技術的傳承與思維的啟發，皆源自於職涯路上多位優秀前輩與恩師的無私指導。
-              無論是在實務維運、資安合規治理，亦或是宏觀的架換設計上，
+              無論是在實務維運、資安合規治理，亦或是宏觀的架構設計上，
               每一份嚴格督促與提攜，都是我能持續在技術道路上不斷向前的核心動力。
               銘記於心，持續精進。
             </p>
