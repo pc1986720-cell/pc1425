@@ -146,22 +146,25 @@
       display: none;
     }
 
-    /* 📸 照片與區塊專用樣式 */
+    /* 📸 照片與區塊專用樣式 - 完美修正爆版與寬度自訂 */
     .gallery-container {
       display: flex;
-      gap: 40px;
+      gap: 30px;
       flex-wrap: wrap;
       margin-top: 20px;
+      width: 100%;
     }
 
     .photo-section {
-      width: 280px;
+      /* 💡 調整整個照片「區塊總寬度」的地方 */
+      width: 300px; 
       text-align: center;
     }
 
     .photo-wrapper {
       width: 100%;
-      height: 320px;
+      /* 💡 調整照片「高度」的地方 */
+      height: 350px; 
       overflow: hidden;
       border: 1px solid #333;
       background-color: #1a1b26;
@@ -173,9 +176,12 @@
     }
 
     .photo-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      /* 確保圖片高寬牢牢鎖死在格子內，不往右衝破爆版 */
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: cover; /* 保持原比例縮放，多餘的部分自動裁切，不壓扁變形 */
       filter: grayscale(20%) brightness(90%);
       transition: filter 0.3s;
     }
@@ -191,6 +197,7 @@
       border: 1px dashed #333;
       padding: 20px;
       border-radius: 4px;
+      height: min-content; /* 確保文字框會隨內容高度自動增長，不再跑出背景 */
     }
 
     .mentor-box {
@@ -333,7 +340,7 @@
           <span class="item-title">網路管理工程師</span> @ 中央研究院計算中心 <span class="timeline-date">(2022/02 - 2023/02)</span>
           <br>負責國家級研究機構（500人以上環境）跨院區及各系所骨幹網路維護與架構規劃。
           <br><span style="color: #555;">└─</span> 運用 <span class="project-tag">LibreNMS / Zabbix</span> 進行核心設備與系統監控，使用 <span class="project-tag">phpipam</span> 整合院區 IP 資源。
-          <br><span style="color: #555;">└─</span> 管理控制 <span class="project-tag">Fortinet</span> 防火牆 Policy 策略安全設定，建置與控管跨院區 <span class="project-tag">Aruba</span> 無線網路。
+          <br><span style="color: #555;">└─</span> 管理控制 <span class="project-tag">Fortinet</span> 防火牆 Policy 策略安全設定，建置與控管跨院區 <span class="project-tag">Aruba</span> 無線網路.
           <br><span style="color: #555;">└─</span> 主導機房核心網路設備採購案、院區大型網路交換器更新專案，並操作 <span class="project-tag">Fluke / LinkRunner</span> 進行實體光纖骨幹檢測。
         </li>
         <li>
