@@ -35,7 +35,7 @@
     }
 
     .terminal-nav {
-      margin: 20px 0 40px 0;
+      margin: 20px 0 30px 0;
       padding: 10px;
       border: 1px dashed #333;
       display: flex;
@@ -72,18 +72,18 @@
     h1 {
       font-size: 28px;
       color: #00ff66;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     h2 {
       font-size: 20px;
       color: #00ccff;
-      margin-top: 30px;
-      margin-bottom: 15px;
+      margin-top: 25px;
+      margin-bottom: 12px;
     }
 
     p, .output-list {
-      margin-bottom: 25px;
+      margin-bottom: 15px;
       color: #cbd5e1;
     }
 
@@ -93,7 +93,7 @@
     }
 
     .output-list li {
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       position: relative;
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -130,7 +130,7 @@
     }
 
     .epic-incidents-container {
-      margin-bottom: 25px;
+      margin-bottom: 15px;
       font-size: 14px;
       font-style: italic;
       line-height: 1.8;
@@ -146,12 +146,58 @@
       display: none;
     }
 
-    footer {
+    /* 📸 照片牆專用樣式 */
+    .photo-grid {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
       margin-top: 20px;
+    }
+
+    .photo-card {
+      background-color: #1a1b26;
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 10px;
+      width: 280px;
+      text-align: center;
+    }
+
+    .photo-wrapper {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      border: 1px solid #222;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 確保照片填滿格子且不變形 */
+      filter: grayscale(30%) brightness(90%); /* 微調成帶有一點復古科技感 */
+      transition: filter 0.3s;
+    }
+
+    .photo-wrapper img:hover {
+      filter: none; /* 滑鼠懸停時恢復色彩 */
+    }
+
+    .photo-caption {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #00ff66;
+    }
+
+    footer {
+      margin-top: 30px;
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
-      padding-top: 20px;
+      padding-top: 15px;
     }
 
     @keyframes fadeIn {
@@ -169,7 +215,8 @@
 
 <div class="terminal">
 
-  <div class="boot-sequence" style="font-size:14px; margin-bottom:30px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
+  <!-- ================= 搞笑資安迷因開場 ================= -->
+  <div class="boot-sequence" style="font-size:14px; margin-bottom:25px; border-left:2px solid #ff0055; padding-left:15px; word-break:break-all;">
     <p style="color:#555; animation-delay:0.1s;">[0.000000] Booting Linux kernel v6.12.0-ext... (Please don't touch anything)</p>
     <p style="color:#cbd5e1; animation-delay:0.3s;">[<span style="color:#00ff66;">OK</span>] Shifting blame to the Network Team...</p>
     <p style="color:#ff0055; animation-delay:0.5s;">[<span style="color:#ff0055;">CRITICAL</span>] CrowdStrike Falcon Sensor updated.</p>
@@ -178,21 +225,23 @@
     <p style="color:#ffcc00; animation-delay:1.1s;">[INFO] Recovery mode: Booting into Safe Mode and deleting the channel file. Welcome back, PC.</p>
   </div>
 
+  <!-- 🛠️ 導覽列新增 [6] Gallery 按鈕 -->
   <div class="terminal-nav" style="animation:fadeIn 0.3s ease-in-out 1.3s both;">
     <button class="nav-btn active" onclick="switchTab(event, 'about')">[1] About</button>
     <button class="nav-btn" onclick="switchTab(event, 'skills')">[2] Skills</button>
     <button class="nav-btn" onclick="switchTab(event, 'certs')">[3] Certifications</button>
     <button class="nav-btn" onclick="switchTab(event, 'experience')">[4] Experience</button>
     <button class="nav-btn" onclick="switchTab(event, 'labs')">[5] Labs</button>
+    <button class="nav-btn" onclick="switchTab(event, 'gallery')">[6] Gallery</button>
   </div>
 
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
+    <!-- ================= 分頁 1: 關於我 ================= -->
     <div id="about" class="tab-content active">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
-      
-      <p style="margin-bottom: 20px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.7;">
-        我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷與專業認證。深知資安領域浩瀚，我始終保持緊迫感並持續在實戰中精進，誠摯歡迎各位前輩指導與鞭策。
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
+      <p style="margin-bottom: 12px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.6;">
+        我是 <span style="color: #00ff66; font-weight: bold;">PC</span>。這裡記錄了我的職涯經歷、技術沉澱與專業認證。資安與網路領域浩瀚無垠，我始終保持不進則退的緊迫感，持續在實戰中精進。若有不足之處，誠摯歡迎各位前輩指導與鞭策。
       </p>
       
       <div class="epic-incidents-container">
@@ -201,8 +250,8 @@
         <p style="margin-bottom: 0;">/* <span style="color: #00ff66; font-weight: bold;">Global BGP Routing & Ivanti VPN</span> // 那些在 2025-2026 年被勒索軟體點名、連夜拔掉網路線、徹夜在機房重構骨幹架構的維運肝臟。 */</p>
       </div>
       
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
-      <p id="current-date" style="margin-bottom: 25px; color: #72809e; font-weight: bold;"></p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ date</p>
+      <p id="current-date" style="margin-bottom: 15px; color: #72809e; font-weight: bold;"></p>
 
       <h1>CYBER SECURITY PORTFOLIO</h1>
       <p>
@@ -212,8 +261,9 @@
       </p>
     </div>
 
+    <!-- ================= 分頁 2: 核心技能 ================= -->
     <div id="skills" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
       <h2>[ Skills Matrix ]</h2>
       <ul class="output-list">
         <li><span class="item-title">Security Governance</span> - ISO 27001 & ISO 27701 資訊安全與隱私管理體系導入、稽核與決策規劃</li>
@@ -223,14 +273,14 @@
       </ul>
     </div>
 
+    <!-- ================= 分頁 3: 專業證照 ================= -->
     <div id="certs" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
       
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Information Security & Governance */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Information Security & Governance */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">ISO 27001:2022 LA</span> - 資訊安全管理系統主導稽核員</li>
-        <li><span class="item-title">ISO 27701:2025 LA</span> - 隱私資訊管理系統主導稽核員</li>
         <li><span class="item-title">IEC 62443-2-1 LA</span> - 工業自動化與控制系統資安方案主導稽核員</li>
         <li><span class="item-title">ICST</span> - 行政院資通安全處 / 公務人員資安職能評量證書 (資通安全概論)</li>
         <li><span class="item-title">ECSA</span> - EC-Council Certified Security Analyst 資安分析專家</li>
@@ -238,25 +288,26 @@
         <li><span class="item-title">Fortinet NSE 4</span> - Network Security Professional 網路安全專家</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Network & Infrastructure */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Network & Infrastructure */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">CCNP Enterprise</span> - Cisco Certified Network Professional 專業級網路工程師</li>
         <li><span class="item-title">CCNA</span> - Cisco Certified Network Associate 網路工程師</li>
         <li><span class="item-title">Aruba ACMA</span> - Aruba Certified Mobility Associate 無線網路工程師</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Virtualization & Development */</p>
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Virtualization & Development */</p>
       <ul class="output-list">
         <li><span class="item-title">VMware VCP</span> - VMware Certified Professional 虛擬化專家</li>
         <li><span class="item-title">Oracle SCJP</span> - Java Certified Professional 程式開發認證</li>
       </ul>
     </div>
 
+    <!-- ================= 分頁 4: 學歷與工作經歷 ================= -->
     <div id="experience" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
       
       <h2>[ Academic Background ]</h2>
-      <ul class="output-list" style="margin-bottom: 40px;">
+      <ul class="output-list" style="margin-bottom: 25px;">
         <li>
           <span class="item-title">資訊工程系 畢業 (最高學歷)</span> @ 大漢技術學院 <span class="timeline-date">(2004/09 - 2008/07)</span>
           <br>奠定計算機概論、作業系統底層、資料結構與網路通訊協定之紮實基礎。
@@ -314,18 +365,19 @@
       </ul>
     </div>
 
+    <!-- ================= 分頁 5: 實驗室與研究 ================= -->
     <div id="labs" class="tab-content">
-      <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
       
-      <p style="color: #00ccff; margin-bottom: 5px;">/* Network Security & Hybrid Simulation */</p>
-      <ul class="output-list" style="margin-bottom: 20px;">
+      <p style="color: #00ccff; margin-bottom: 4px;">/* Network Security & Hybrid Simulation */</p>
+      <ul class="output-list" style="margin-bottom: 15px;">
         <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。</li>
         <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。</li>
         <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。</li>
       </ul>
 
-      <p style="color: #00ccff; margin-bottom: 5px;">/* NetDevOps & SecOps Automation */</p>
+      <p style="color: #00ccff; margin-bottom: 4px;">/* NetDevOps & SecOps Automation */</p>
       <ul class="output-list">
         <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
         <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
@@ -333,8 +385,32 @@
         <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
+
+    <!-- ================= 🛠️ 新增分頁 6: 影像藝廊 ================= -->
+    <div id="gallery" class="tab-content">
+      <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ ./view_images.sh --target=all</p>
+      <h2>[ Image Gallery & Mentors ]</h2>
+      
+      <div class="photo-grid">
+        <!-- 個人照 -->
+        <div class="photo-card">
+          <div class="photo-wrapper">
+            <img src="path/to/your-photo.jpg" alt="PC's Profile Photo" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style="color:#555; font-size:12px;">[ Image Not Found ]</span>'">
+          </div>
+          <div class="photo-caption">PC // User Profile</div>
+        </div>
+
+        <!-- 老師照 -->
+        <div class="photo-card">
+          <div class="photo-wrapper">
+            <img src="path/to/teacher-photo.jpg" alt="Mentor Photo" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style="color:#555; font-size:12px;">[ Image Not Found ]</span>'">
+          </div>
+          <div class="photo-caption">Mentor // 恩師與先進</div>
+        </div>
+      </div>
+    </div>
     
-    <p><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
+    <p style="margin-bottom: 0;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ _</p>
 
   </div>
 
