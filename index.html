@@ -146,7 +146,7 @@
       display: none;
     }
 
-    /* 📸 終極自然包覆佈局：不固定高度，左右等高，拒絕黑底，拒絕網頁滾動條 */
+    /* 📸 自然包覆佈局：不固定高度，左右等高，拒絕黑底，拒絕網頁滾動條 */
     .gallery-container {
       display: flex;
       gap: 25px;
@@ -174,7 +174,7 @@
     .photo-wrapper img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 💡 改用 cover！讓照片完美填滿外框，徹底消滅底部多餘的黑塊 */
+      object-fit: cover; /* 💡 完美填滿外框，徹底消滅底部多餘黑塊 */
       display: block;
       filter: grayscale(15%) brightness(95%);
     }
@@ -257,7 +257,6 @@
 
   <div>
 
-    <!-- [1] About Tab -->
     <div id="about" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
       <p style="margin-bottom: 12px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.6;">
@@ -281,7 +280,6 @@
       </p>
     </div>
 
-    <!-- [2] Skills Tab -->
     <div id="skills" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
       <h2>[ Skills Matrix ]</h2>
@@ -293,7 +291,6 @@
       </ul>
     </div>
 
-    <!-- [3] Certifications Tab (自由下拉) -->
     <div id="certs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
@@ -322,7 +319,6 @@
       </ul>
     </div>
 
-    <!-- [4] Experience Tab (自由下拉) -->
     <div id="experience" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
       
@@ -373,31 +369,43 @@
       </ul>
     </div>
 
-    <!-- [5] Labs Tab -->
     <div id="labs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
       <ul class="output-list">
-        <li><span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。</li>
-        <li><span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。</li>
-        <li><span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。</li>
+        <li>
+          <span class="item-title">Enterprise Infrastructure Simulation</span> - 建置 <span class="project-tag">Fortinet</span> 與 <span class="project-tag">Palo Alto (PA)</span> 虛擬化防火牆環境，實作總公司與分公司之跨品牌 <span class="project-tag">IPsec VPN Site-to-Site</span> 串接。
+        </li>
+        <li>
+          <span class="item-title">EVE-NG Virtual Network Lab</span> - 於虛擬化平台架設 <span class="project-tag">EVE-NG</span> 大型模擬環境，導入 <span class="project-tag">Cisco IOS/Nexus IOL</span> 鏡像。
+        </li>
+        <li>
+          <span class="item-title">Bare-Metal ESXi Infrastructure</span> - 實作 <span class="project-tag">VMware ESXi</span> Hypervisor 從底層裸機（Bare-Metal）零開始部署。
+          <br><span style="color: #555;">└─</span> 於虛擬化環境內獨立建置企業級 <span class="project-tag">Active Directory (AD)</span> 網域控制站。
+        </li>
+        <li>
+          <span class="item-title">SOC Automation & Operations</span> - 整合開源資安監控管理平台.
+          <br><span style="color: #555;">└─</span> 部署 <span class="project-tag">Wazuh HIDS</span> 進行主機端點入侵偵測與日誌分析。
+          <br><span style="color: #555;">└─</span> 整合 <span class="project-tag">TheHive / Cortex</span> 建立自動化資安事件響應與情資威脅分析平台。
+        </li>
+        <li>
+          <span class="item-title">Open-Source Security System Deployment</span> - 獨立部署多項開源資安防禦與維運工具。
+          <br><span style="color: #555;">└─</span> <span class="project-tag">NetBox</span> (IPAM/DCIM 基礎設施管理)、<span class="project-tag">Uptime Kuma</span> (服務狀態監控)、<span class="project-tag">Vaultwarden</span> (企業憑證密碼安全管理)。
+        </li>
       </ul>
     </div>
 
-    <!-- [6] Gallery Tab (🎯 自然包覆，徹底消除黑底與滾動條) -->
     <div id="gallery" class="tab-content active">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat templates/mentors.md</p>
       <h2>[ Profile & Mentor Info ]</h2>
       
       <div class="gallery-container">
-        <!-- 左側照片：高度百分之百與右邊切齊，使用 cover 填滿無黑底 -->
         <div class="photo-section">
           <div class="photo-wrapper">
             <img src="https://inmywordz.com/wp-content/uploads/20220918101811_13.jpg" alt="Profile Photo">
           </div>
         </div>
 
-        <!-- 右側內容：精簡內距與行高，自然收合高度 -->
         <div class="text-section">
           <div class="mentor-box">
             <h3 style="color: #e0af68; font-size: 15px; margin-bottom: 6px;">[ 恩師與職涯先進 ]</h3>
@@ -409,12 +417,11 @@
             </p>
           </div>
           
-          <!-- 樹狀清單 -->
           <div class="mentor-box" style="border-left-color: #00ccff; padding-left: 15px; margin-bottom: 0;">
             <ul style="list-style: none; padding-left: 0; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.7;">
               <li style="margin-bottom: 5px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
-              <li style="margin-bottom: 5px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
-              <li style="margin-bottom: 5px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
+              <li style="margin-bottom: 5px;"><span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
+              <li style="margin-bottom: 5px;"><span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
               <li style="margin-bottom: 0;"><span style="color: #555;">└─</span> <span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
             </ul>
           </div>
