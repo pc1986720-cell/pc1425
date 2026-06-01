@@ -146,39 +146,43 @@
       display: none;
     }
 
-    /* 📸 Gallery 終極視覺優化排版 */
+    /* 📸 終極網格對齊方案：徹底鎖死下緣，消滅 1px 誤差 */
     .gallery-container {
-      display: flex;
-      gap: 35px;
+      display: grid;
+      grid-template-columns: 320px 1fr; /* 鎖定左側寬度，右側自適應 */
+      gap: 25px;
       width: 100%;
-      align-items: flex-start; /* 順應兩側內容自然高度 */
       margin-top: 20px;
+      align-items: stretch; /* 強迫左右網格物理高度絕對相等 */
     }
 
     .photo-section {
-      width: 320px; 
-      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
     }
 
     .photo-wrapper {
       width: 100%;
-      overflow: hidden;
-      /* 💡 左側照片框改用俐落的雙邊夾擊線條，呼應終格調 */
-      border-left: 2px solid #333;
-      border-right: 2px solid #333;
+      flex: 1;                 /* 填滿整個網格高度 */
+      height: 0;               /* 關鍵：重設基礎高度，強迫由 flex 決定 */
+      min-height: 100%;        /* 物理填滿 */
+      border: 1px solid #333;
       background-color: #0a0a0a;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 4px;
     }
 
     .photo-wrapper img {
       width: 100% !important;
-      height: auto !important;
-      display: block;
-      filter: grayscale(10%) brightness(95%);
+      height: 100% !important;
+      object-fit: cover;       /* 確保照片完美填滿外框不變形 */
+      display: block;          /* 移除行內幽靈 4px 空隙 */
+      filter: grayscale(15%) brightness(95%);
       transition: filter 0.3s;
     }
 
@@ -188,25 +192,27 @@
 
     .photo-caption {
       text-align: center;
-      margin-top: 15px;
-      color: #72809e;
+      margin-top: 12px;
+      color: #a9b1d6;
       font-size: 14px;
-      font-weight: bold;
     }
 
     .text-section {
-      flex: 1;
-      padding: 5px 0 5px 25px;
-      /* 💡 移除原本死板的封閉虛線外框，改用高質感的左側裝飾線，徹底解決下緣落差問題 */
-      border-left: 1px dashed #333; 
+      width: 100%;
+      height: 100%;
+      background-color: #111219;
+      border: 1px dashed #333; /* 經典虛線外框 */
+      padding: 22px;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
+      justify-content: center; /* 內容垂直置中，極致美觀 */
     }
 
     .mentor-box {
       border-left: 3px solid #e0af68;
       padding-left: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .mentor-box:last-child {
@@ -214,7 +220,7 @@
     }
 
     footer {
-      margin-top: 50px;
+      margin-top: 40px;
       color: #444;
       font-size: 14px;
       border-top: 1px solid #222;
@@ -231,19 +237,14 @@
       animation: fadeIn 0.4s ease-in-out both;
     }
 
+    /* 手機版 RWD 兼容 */
     @media (max-width: 768px) {
       .gallery-container {
-        flex-direction: column;
-        gap: 20px;
+        grid-template-columns: 1fr;
       }
-      .photo-section {
-        width: 100%;
-      }
-      .text-section {
-        border-left: none;
-        padding-left: 0;
-        padding-top: 15px;
-        border-top: 1px dashed #333;
+      .photo-wrapper {
+        height: 350px;
+        min-height: auto;
       }
     }
   </style>
@@ -372,7 +373,7 @@
         <li>
           <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
           <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運.
-          <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。
+          <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬 management，以及內外網 DNS 架構維護。
           <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
           <br><span style="color: #555;">└─</span> <span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。
           <br><span style="color: #555;">└─</span> <span class="item-title">核心專案：</span>參與頻寬管理專案、<span class="project-tag">CyberArk</span> 特權帳號專案、端點端到端加密（E2EE）專案與異地備援規劃。
@@ -411,7 +412,7 @@
       <ul class="output-list">
         <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
         <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制。</li>
-        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
+        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件 management 平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
         <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
