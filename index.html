@@ -89,7 +89,7 @@
 
     .output-list {
       list-style: none;
-      padding-left: 20px;
+      padding-left: 24px; /* 微調縮排寬度以完美容納固定寬度的符號 */
     }
 
     .output-list li {
@@ -101,15 +101,66 @@
       text-justify: inter-ideograph;
     }
 
+    /* 統一列表樹狀符號：強制指定等寬字型，避免寬度不一致 */
     .output-list li::before {
       content: "├─";
+      font-family: 'Courier New', Courier, monospace, "SimSun", "PMingLiU";
       color: #555;
       position: absolute;
-      left: -20px;
+      left: -24px;
       top: 0;
+      width: 20px;
+      letter-spacing: -1px;
     }
 
     .output-list li:last-child::before {
+      content: "└─";
+    }
+
+    /* 經歷頁面子項目的專用樹狀符號樣式 */
+    .sub-list-item {
+      position: relative;
+      padding-left: 24px;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .sub-list-item::before {
+      content: "└─";
+      font-family: 'Courier New', Courier, monospace, "SimSun", "PMingLiU";
+      color: #555;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+    }
+
+    /* 恩師名單專用樹狀符號樣式 */
+    .mentor-list {
+      list-style: none;
+      padding-left: 24px;
+    }
+
+    .mentor-list li {
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .mentor-list li::before {
+      content: "├─";
+      font-family: 'Courier New', Courier, monospace, "SimSun", "PMingLiU";
+      color: #555;
+      position: absolute;
+      left: -24px;
+      top: 0;
+      width: 20px;
+    }
+
+    .mentor-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .mentor-list li:last-child::before {
       content: "└─";
     }
 
@@ -163,7 +214,7 @@
 
     .photo-wrapper {
       width: 100%;
-      /* 💡 調整照片「高度」的地方 */
+      /* 💡 調整照片「高度}的地方 */
       height: 265px; 
       overflow: hidden;
       border: 1px solid #333;
@@ -258,7 +309,6 @@
 
   <div style="animation: fadeIn 0.3s ease-in-out 1.3s both;">
 
-    <!-- [1] About Tab -->
     <div id="about" class="tab-content active">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ whoami</p>
       <p style="margin-bottom: 12px; color: #cbd5e1; text-align: justify; text-justify: inter-ideograph; line-height: 1.6;">
@@ -282,7 +332,6 @@
       </p>
     </div>
 
-    <!-- [2] Skills Tab -->
     <div id="skills" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat skills_matrix.txt</p>
       <h2>[ Skills Matrix ]</h2>
@@ -294,7 +343,6 @@
       </ul>
     </div>
 
-    <!-- [3] Certifications Tab -->
     <div id="certs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ certutil -viewcerts</p>
       <h2>[ Professional Certifications ]</h2>
@@ -324,7 +372,6 @@
       </ul>
     </div>
 
-    <!-- [4] Experience Tab -->
     <div id="experience" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ history | grep -E "EMPLOYMENT|EDUCATION" --color=always</p>
       
@@ -349,41 +396,41 @@
         <li>
           <span class="item-title">網路管理工程師</span> @ 中央研究院計算中心 <span class="timeline-date">(2022/02 - 2023/02)</span>
           <br>負責國家級研究機構（500人以上環境）跨院區及各系所骨幹網路維護與架構規劃。
-          <br><span style="color: #555;">└─</span> 運用 <span class="project-tag">LibreNMS / Zabbix</span> 進行核心設備與系統監控，使用 <span class="project-tag">phpipam</span> 整合院區 IP 資源。
-          <br><span style="color: #555;">└─</span> 管理控制 <span class="project-tag">Fortinet</span> 防火牆 Policy 策略安全設定，建置與控管跨院區 <span class="project-tag">Aruba</span> 無線網路。
-          <br><span style="color: #555;">└─</span> 主導機房核心網路設備採購案、院區大型網路交換器更新專案，並操作 <span class="project-tag">Fluke / LinkRunner</span> 進行實體光纖骨幹檢測。
+          <span class="sub-list-item">運用 <span class="project-tag">LibreNMS / Zabbix</span> 進行核心設備與系統監控，使用 <span class="project-tag">phpipam</span> 整合院區 IP 資源。</span>
+          <span class="sub-list-item">管理控制 <span class="project-tag">Fortinet</span> 防火牆 Policy 策略安全設定，建置與控管跨院區 <span class="project-tag">Aruba</span> 無線網路。</span>
+          <span class="sub-list-item">主導機房核心網路設備採購案、院區大型網路交換器更新專案，並操作 <span class="project-tag">Fluke / LinkRunner</span> 進行實體光纖骨幹檢測。</span>
         </li>
         <li>
           <span class="item-title">網路管理工程師 (資訊專員)</span> @ 國泰健康管理顧問 <span class="timeline-date">(2021/09 - 2022/02)</span>
           <br>主導全台多據點網路安全與機房虛擬化整合專案。
-          <br><span style="color: #555;">└─</span> 經辦全台據點防火牆汰換升級（部署 <span class="project-tag">Fortinet 401E / 101F, SD-WAN, Site-to-Site IPsec VPN</span> 與 <span class="project-tag">FortiAnalyzer</span>）。
-          <br><span style="color: #555;">└─</span> 獨立負責 <span class="project-tag">Pulse Secure VPN</span> 安全存取架構之規劃與建置。
-          <br><span style="color: #555;">└─</span> 主責新據點（內湖產後中心）整體網路及系統架構規劃。
+          <span class="sub-list-item">經辦全台據點防火牆汰換升級（部署 <span class="project-tag">Fortinet 401E / 101F, SD-WAN, Site-to-Site IPsec VPN</span> 與 <span class="project-tag">FortiAnalyzer</span>）。</span>
+          <span class="sub-list-item">獨立負責 <span class="project-tag">Pulse Secure VPN</span> 安全存取架構之規劃與建置。</span>
+          <span class="sub-list-item">主責新據點（內湖產後中心）整體網路及系統架構規劃。</span>
         </li>
         <li>
           <span class="item-title">網路系統工程師</span> @ 瑞興商業銀行 <span class="timeline-date">(2019/03 - 2021/08)</span>
           <br>負責金融體系（500人以上銀行端）高合規要求的網路、系統與資安防禦維運。
-          <br><span style="color: #555;">└─</span> <span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。
-          <br><span style="color: #555;">└─</span> <span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。
-          <br><span style="color: #555;">└─</span> <span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。
-          <br><span style="color: #555;">└─</span> <span class="item-title">核心專案：</span>參與頻寬管理專案、<span class="project-tag">CyberArk</span> 特權帳號專案、端點端到端加密（E2EE）專案與異地備援規劃。
+          <span class="sub-list-item"><span class="item-title">網路安全：</span>維護管理 <span class="project-tag">Cisco</span> 核心網路、<span class="project-tag">FortiWAN / Fortigate</span> 防火牆、<span class="project-tag">Allot</span> 頻寬管理，以及內外網 DNS 架構維護。</span>
+          <span class="sub-list-item"><span class="item-title">系統與備份：</span>管理跨平台虛擬化（<span class="project-tag">VMware</span>）、Windows/Linux 伺服器建置與 <span class="project-tag">MSSQL AlwaysOn</span> 高可用性架構維運。</span>
+          <span class="sub-list-item"><span class="item-title">資安防護：</span>推動網路與系統資安評估（弱掃修補），維護AD、憑證中心（CA）。</span>
+          <span class="sub-list-item"><span class="item-title">核心專案：</span>參與頻寬管理專案、<span class="project-tag">CyberArk</span> 特權帳號專案、端點端到端加密（E2EE）專案與異地備援規劃。</span>
         </li>
         <li>
           <span class="item-title">技術顧問工程師 (FAE)</span> @ 曜祥網技 <span class="timeline-date">(2016/12 - 2019/02)</span>
           <br>擔任資安前端技術顧問，負責大型金融、政府與指標性企業客戶資安防禦系統與資安合規建置專案（SIP / GCB）。
-          <br><span style="color: #555;">└─</span> <span class="item-title">政府與企業案：</span>法務部 SIP 建置案、台灣世曦 SIP 建置案、凌群電腦中心 SIP 建置案。
-          <br><span style="color: #555;">└─</span> <span class="item-title">金融合規案：</span>中國信託、第一金控、第一銀行信用卡处、土地銀行 GCB 政府組態基準合規建置案。
+          <span class="sub-list-item"><span class="item-title">政府與企業案：</span>法務部 SIP 建置案、台灣世曦 SIP 建置案、凌群電腦中心 SIP 建置案。</span>
+          <span class="sub-list-item"><span class="item-title">金融合規案：</span>中國信託、第一金控、第一銀行信用卡处、土地銀行 GCB 政府組態基準合規建置案。</span>
         </li>
         <li>
           <span class="item-title">維護工程師 (MIS)</span> @ 山富國際旅行社 <span class="timeline-date">(2014/11 - 2016/06)</span>
           <br>維護全台大型電商旅遊平台機房架裝，主導多項企業級核心基礎設施現代化升級專案。
-          <br><span style="color: #555;">└─</span> 負責企業雲端化升級（導入 <span class="project-tag">Office 365 / 騰訊 QQ</span> 通訊軟體）。
-          <br><span style="color: #555;">└─</span> 協助核心機房硬體大更換（<span class="project-tag">IBM M6</span> 設備更換、Storage 儲存設備汰換與 <span class="project-tag">Hyper-V</span> 叢集容錯轉移建置）。
+          <span class="sub-list-item">負責企業雲端化升級（導入 <span class="project-tag">Office 365 / 騰訊 QQ</span> 通訊軟體）。</span>
+          <span class="sub-list-item">協助核心機房硬體大更換（<span class="project-tag">IBM M6</span> 設備更換、Storage 儲存設備汰換與 <span class="project-tag">Hyper-V</span> 叢集容錯轉移建置）。</span>
         </li>
         <li>
           <span class="item-title">程式設計師</span> @ 泓準資訊 <span class="timeline-date">(2012/02 - 2014/10)</span>
           <br>兼管系統維運之 MIS 程式工程師，負責網際網路平台之核心代碼撰寫與後端資料庫優化。
-          <br><span style="color: #555;">└─</span> <span class="project-tag">ASP</span> 網頁功能開發、<span class="project-tag">MS SQL Server</span> 資料庫建置管理、網路故障排除與軟硬體維護。
+          <span class="sub-list-item"><span class="project-tag">ASP</span> 網頁功能開發、<span class="project-tag">MS SQL Server</span> 資料庫建置管理、網路故障排除與軟硬體維護。</span>
         </li>
         <li>
           <span class="item-title">維修測試工程師</span> @ 歆宇科技 <span class="timeline-date">(2010/07 - 2012/02)</span>
@@ -392,7 +439,6 @@
       </ul>
     </div>
 
-    <!-- [5] Labs Tab -->
     <div id="labs" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"</p>
       <h2>[ Security Labs & Environment ]</h2>
@@ -408,12 +454,11 @@
       <ul class="output-list">
         <li><span class="item-title">LibreNMS Custom Telemetry & Alerting</span> - 實作 <span class="project-tag">LibreNMS</span> 監控系統客製化，撰寫進階告警規則（Alert Rules）。</li>
         <li><span class="item-title">Webhook Automated Notification</span> - 串接 LibreNMS 與通訊軟體 API（Webhook），開發網路事件即時告警機制.</li>
-        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件管理平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
+        <li><span class="item-title">FortiSIEM Log Parser Scripter</span> - 針對 <span class="project-tag">FortiSIEM</span> 資安事件 management 平台，撰寫客製化日誌解析腳本（Log Parser）。</li>
         <li><span class="item-title">Palo Alto Threat Mitigation Automation</span> - 撰寫 <span class="project-tag">Python API 腳本</span> 串接開源威脅情報（Threat Intel Feed），實作自動化導入 PA 防火牆惡意 IP 黑名單。</li>
       </ul>
     </div>
 
-    <!-- [6] Gallery Tab -->
     <div id="gallery" class="tab-content">
       <p style="margin-bottom: 4px;"><span class="prompt">guest@infosec</span>:<span class="path">~</span>$ cat templates/mentors.md</p>
       <h2>[ Profile & Mentor Info ]</h2>
@@ -436,13 +481,12 @@
             </p>
           </div>
 
-          <!-- 💡 重點恩師名單：使用樹狀結構排版，凸顯專業感 -->
           <div class="mentor-box" style="border-left-color: #00ccff; padding-left: 15px;">
-            <ul style="list-style: none; padding-left: 0; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
-              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
-              <li style="margin-bottom: 6px;"><span style="color: #555;">├─</span> <span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
-              <li style="margin-bottom: 0;"><span style="color: #555;">└─</span> <span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
+            <ul class="mentor-list" style="padding-left: 24px; font-family: inherit; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
+              <li><span style="color: #00ff66; font-weight: bold;">ISO 27001 / 27701治理</span> ： 柯富聰 老師 <span style="color: #555;">(SGS)</span></li>
+              <li><span style="color: #00ff66; font-weight: bold;">CCNA / CCNP 網路骨幹</span> ： Travis 老師 <span style="color: #555;">(資策會)</span></li>
+              <li><span style="color: #00ff66; font-weight: bold;">EC-Council 資安攻防</span> ： 唐任威 老師 <span style="color: #555;">(恆逸)</span></li>
+              <li><span style="color: #ff007f; font-weight: bold;">職涯導師 (Mentorship)</span> ： 阿德 老師 <span style="color: #555;">(前主管)</span></li>
             </ul>
           </div>
         </div>
